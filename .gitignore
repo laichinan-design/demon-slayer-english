@@ -1,0 +1,11 @@
+# 環境與金鑰（絕不可上傳）
+.env
+.openai.env
+*.key
+
+# 系統
+Thumbs.db
+.DS_Store
+
+# 生圖暫存（covers/ 為網站素材，需保留，不在此忽略）
+slides/generated/

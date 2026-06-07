@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>鬼滅之刃 英語修行 🗡️ Demon Slayer English Quest｜20關文法闖關</title>
+<style>
+  :root{
+    --bg:#0a0e0c;
+    --panel:rgba(255,255,255,0.05);
+    --panel-solid:#14201a;
+    --accent:#2bbf8a;      /* 炭治郎綠 */
+    --accent2:#127a5a;
+    --cyan:#4fc3f7;        /* 水之呼吸 */
+    --gold:#ffd54f;
+    --flame:#ff6b3d;       /* 火焰 */
+    --green:#3ddc84;
+    --red:#ff5c6c;
+    --text:#f2f7f4;
+    --muted:#9bb0a6;
+    --line:rgba(255,255,255,0.12);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:"Segoe UI","Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif;
+    color:var(--text);
+    background:linear-gradient(160deg,#0a0e0c 0%,#102a1f 45%,#0b1a26 100%);
+    background-attachment:fixed;min-height:100vh;line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  /* 市松紋（炭治郎羽織）裝飾 */
+  body::before{
+    content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.05;
+    background-image:
+      linear-gradient(45deg,#2bbf8a 25%,transparent 25%,transparent 75%,#2bbf8a 75%),
+      linear-gradient(45deg,#2bbf8a 25%,transparent 25%,transparent 75%,#2bbf8a 75%);
+    background-size:60px 60px;background-position:0 0,30px 30px;
+  }
+  body::after{
+    content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+    background:
+      radial-gradient(circle at 12% 18%,rgba(43,191,138,.18),transparent 38%),
+      radial-gradient(circle at 88% 12%,rgba(79,195,247,.15),transparent 38%),
+      radial-gradient(circle at 50% 92%,rgba(255,107,61,.14),transparent 45%);
+  }
+  .wrap{position:relative;z-index:1;max-width:880px;margin:0 auto;padding:24px 18px 80px}
+
+  header{text-align:center;padding:18px 0 8px}
+  .logo{
+    font-size:32px;font-weight:800;letter-spacing:2px;
+    background:linear-gradient(90deg,var(--accent),var(--gold),var(--cyan));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    text-shadow:0 0 30px rgba(43,191,138,.25);
+  }
+  .logo .en{display:block;font-size:15px;letter-spacing:4px;margin-top:2px;
+    -webkit-text-fill-color:var(--muted);color:var(--muted);font-weight:600}
+  .tagline{color:var(--muted);font-size:13px;margin-top:6px}
+
+  .topbar{display:flex;align-items:center;gap:14px;margin:18px 0 22px;
+    background:var(--panel);border:1px solid var(--line);border-radius:16px;
+    padding:12px 16px;backdrop-filter:blur(8px)}
+  .hearts{font-size:18px;letter-spacing:2px}
+  .xp{margin-left:auto;font-weight:700;color:var(--gold)}
+  .pbar{flex:1;height:10px;border-radius:99px;background:rgba(255,255,255,.1);overflow:hidden}
+  .pbar > i{display:block;height:100%;width:0;border-radius:99px;
+    background:linear-gradient(90deg,var(--accent),var(--cyan));transition:width .5s ease}
+
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:20px;
+    padding:24px;backdrop-filter:blur(10px);box-shadow:0 18px 50px rgba(0,0,0,.4)}
+  .badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;
+    letter-spacing:.5px;text-transform:uppercase;padding:5px 12px;border-radius:99px;
+    background:rgba(43,191,138,.2);border:1px solid rgba(43,191,138,.5);color:#a8f0d4}
+  h2.level-title{font-size:23px;margin:12px 0 4px}
+  .level-sub{color:var(--muted);font-size:14px;margin-bottom:18px}
+  .rank-tag{display:inline-block;font-size:12px;color:var(--gold);border:1px solid rgba(255,213,79,.4);
+    border-radius:8px;padding:2px 8px;margin-left:8px;background:rgba(255,213,79,.08)}
+
+  .map-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px;margin-top:8px}
+  .node{position:relative;cursor:pointer;border-radius:16px;padding:16px 14px;border:1px solid var(--line);
+    background:var(--panel-solid);transition:transform .15s,box-shadow .15s,border-color .15s;overflow:hidden}
+  .node:hover{transform:translateY(-4px);border-color:var(--accent);box-shadow:0 12px 30px rgba(43,191,138,.25)}
+  .node .emoji{font-size:30px}
+  .node .n-num{font-weight:800;margin-top:6px;font-size:13px;color:var(--gold)}
+  .node .n-name{font-weight:700;margin-top:2px;font-size:13.5px;line-height:1.4}
+  .node .n-focus{color:var(--muted);font-size:11.5px;margin-top:4px}
+  .node .n-state{margin-top:8px;font-size:11.5px;font-weight:700}
+  .node.locked{opacity:.4;cursor:not-allowed;filter:grayscale(.5)}
+  .node.locked:hover{transform:none;border-color:var(--line);box-shadow:none}
+  .node.cleared{border-color:rgba(61,220,132,.6)}
+  .node .ribbon{position:absolute;top:9px;right:-32px;transform:rotate(40deg);background:var(--green);
+    color:#06251a;font-size:9px;font-weight:800;padding:3px 36px;letter-spacing:1px}
+  .lock-ico{position:absolute;top:10px;right:12px;font-size:15px;opacity:.85}
+
+  .story{background:rgba(0,0,0,.28);border:1px solid var(--line);border-radius:16px;
+    padding:20px;margin:6px 0 4px;font-size:17px;line-height:2}
+  .story p{margin-bottom:14px}
+  .kw{color:var(--cyan);font-weight:700;cursor:help;border-bottom:1px dashed rgba(79,195,247,.5)}
+  .trans{color:var(--muted);font-size:14px;font-style:italic;display:block;margin-top:2px}
+
+  .glossary{margin-top:18px}
+  .glossary h4,.grammar h4{font-size:14px;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
+  .gloss-item{display:flex;gap:10px;padding:8px 0;border-bottom:1px dashed var(--line);font-size:15px}
+  .gloss-item b{color:var(--cyan);min-width:130px}
+  .gloss-item .pos{color:var(--muted);font-size:12px;min-width:44px}
+
+  .grammar{margin-top:20px;background:rgba(43,191,138,.1);border:1px solid rgba(43,191,138,.4);
+    border-radius:16px;padding:18px}
+  .grammar .rule{background:rgba(0,0,0,.28);border-radius:10px;padding:10px 14px;margin:8px 0;font-size:15px}
+  .grammar .rule em{color:var(--gold);font-style:normal;font-weight:700}
+  .grammar .rule b{color:var(--cyan)}
+
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;border:none;
+    border-radius:14px;font-size:16px;font-weight:700;padding:14px 26px;color:#06251a;
+    background:linear-gradient(90deg,var(--accent),var(--cyan));
+    box-shadow:0 10px 26px rgba(43,191,138,.35);transition:transform .12s,filter .12s}
+  .btn:hover{transform:translateY(-2px);filter:brightness(1.08)}
+  .btn:active{transform:translateY(0)}
+  .btn.ghost{background:transparent;border:1px solid var(--line);box-shadow:none;color:var(--text)}
+  .btn.ghost:hover{border-color:var(--accent)}
+  .btn:disabled{opacity:.5;cursor:not-allowed;transform:none;filter:none}
+  .btn-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px;align-items:center}
+  .spacer{flex:1}
+
+  .q-head{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+  .q-counter{font-size:13px;color:var(--muted);font-weight:700}
+  .q-type{margin-left:auto}
+  .q-text{font-size:19px;font-weight:600;margin:12px 0 18px}
+  .q-text .blank{display:inline-block;min-width:90px;border-bottom:2px solid var(--accent);text-align:center;color:var(--gold)}
+  .options{display:grid;gap:12px}
+  .opt{text-align:left;cursor:pointer;border:1px solid var(--line);border-radius:14px;padding:14px 18px;
+    background:var(--panel-solid);font-size:16px;color:var(--text);transition:border-color .12s,background .12s,transform .1s;
+    display:flex;gap:12px;align-items:center}
+  .opt:hover{border-color:var(--accent);transform:translateX(2px)}
+  .opt .key{width:28px;height:28px;flex:none;border-radius:8px;background:rgba(255,255,255,.1);
+    display:grid;place-items:center;font-weight:800;font-size:14px}
+  .opt.correct{border-color:var(--green);background:rgba(61,220,132,.16)}
+  .opt.correct .key{background:var(--green);color:#06251a}
+  .opt.wrong{border-color:var(--red);background:rgba(255,92,108,.16)}
+  .opt.wrong .key{background:var(--red)}
+  .opt.disabled{pointer-events:none;opacity:.85}
+
+  .feedback{margin-top:16px;border-radius:14px;padding:14px 16px;font-size:15px;display:none}
+  .feedback.show{display:block;animation:pop .25s ease}
+  .feedback.ok{background:rgba(61,220,132,.15);border:1px solid rgba(61,220,132,.5)}
+  .feedback.no{background:rgba(255,92,108,.15);border:1px solid rgba(255,92,108,.5)}
+  .feedback b{color:var(--gold)}
+  @keyframes pop{from{transform:scale(.96);opacity:0}to{transform:scale(1);opacity:1}}
+
+  .dots{display:flex;gap:7px;margin-top:14px;flex-wrap:wrap}
+  .dots i{width:11px;height:11px;border-radius:50%;background:rgba(255,255,255,.15)}
+  .dots i.pass{background:var(--green)}
+  .dots i.fail{background:var(--red)}
+  .dots i.cur{background:var(--gold);box-shadow:0 0 10px var(--gold)}
+
+  .result{text-align:center;padding:14px 6px}
+  .result .big{font-size:54px;margin-bottom:8px}
+  .result h2{font-size:25px;margin-bottom:6px}
+  .result p{color:var(--muted);margin-bottom:6px}
+  .stat-row{display:flex;justify-content:center;gap:26px;margin:18px 0}
+  .stat .num{font-size:28px;font-weight:800;color:var(--gold)}
+  .stat .lbl{font-size:12px;color:var(--muted)}
+
+  .toast{position:fixed;left:50%;bottom:30px;transform:translateX(-50%) translateY(120%);
+    background:var(--panel-solid);border:1px solid var(--accent);border-radius:14px;padding:12px 22px;
+    font-weight:700;z-index:50;transition:transform .35s ease;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+  .toast.show{transform:translateX(-50%) translateY(0)}
+
+  .hidden{display:none !important}
+  footer{text-align:center;color:var(--muted);font-size:12px;margin-top:30px;opacity:.7}
+  .reset-link{color:var(--muted);font-size:12px;cursor:pointer;text-decoration:underline;margin-left:8px}
+
+  /* 工具按鈕 */
+  .icon-btn{cursor:pointer;border:1px solid var(--line);background:rgba(255,255,255,.06);
+    border-radius:10px;width:38px;height:34px;display:grid;place-items:center;font-size:16px;
+    color:var(--text);transition:border-color .12s,background .12s}
+  .icon-btn:hover{border-color:var(--accent);background:rgba(43,191,138,.12)}
+
+  /* 地圖縮圖 */
+  .n-thumb{position:relative;width:100%;height:84px;border-radius:12px;overflow:hidden;
+    background:linear-gradient(135deg,#13241c,#102a26);display:grid;place-items:center;margin-bottom:4px}
+  .n-thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .n-thumb .n-emoji{position:relative;font-size:30px;z-index:0;opacity:.8}
+  .node.locked .n-thumb{filter:grayscale(.7) brightness(.6)}
+
+  /* 閱讀頁封面 */
+  .read-cover{width:100%;max-height:230px;object-fit:cover;border-radius:16px;
+    border:1px solid var(--line);margin:4px 0 14px;display:block}
+
+  /* AI 出題列 */
+  .ai-row{display:flex;align-items:center;gap:10px;margin-top:16px;flex-wrap:wrap;
+    background:rgba(79,195,247,.08);border:1px solid rgba(79,195,247,.3);border-radius:14px;padding:12px 14px}
+  .switch{position:relative;display:inline-block;width:46px;height:26px;flex:none}
+  .switch input{display:none}
+  .slider{position:absolute;inset:0;background:rgba(255,255,255,.18);border-radius:99px;transition:.2s;cursor:pointer}
+  .slider::before{content:"";position:absolute;height:20px;width:20px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.2s}
+  .switch input:checked + .slider{background:var(--accent)}
+  .switch input:checked + .slider::before{transform:translateX(20px)}
+  .ai-row .ai-label{font-weight:700;font-size:14px}
+  .ai-row .ai-note{color:var(--muted);font-size:12px;flex-basis:100%}
+  .ai-warn{color:var(--gold);font-size:12px;flex-basis:100%}
+
+  /* 設定 modal */
+  .modal-bg{position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);
+    display:none;place-items:center;padding:20px}
+  .modal-bg.show{display:grid}
+  .modal{background:var(--panel-solid);border:1px solid var(--line);border-radius:18px;
+    padding:24px;max-width:460px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+  .modal h3{font-size:18px;margin-bottom:6px}
+  .modal p{color:var(--muted);font-size:13px;margin-bottom:14px;line-height:1.6}
+  .modal label{display:block;font-size:13px;font-weight:700;margin:12px 0 6px}
+  .modal input,.modal select{width:100%;padding:11px 12px;border-radius:10px;border:1px solid var(--line);
+    background:rgba(0,0,0,.3);color:var(--text);font-size:14px;font-family:inherit}
+  .modal .hint{color:var(--cyan);font-size:12px;margin-top:6px}
+  .modal-actions{display:flex;gap:10px;margin-top:18px}
+
+  /* 載入動畫 */
+  .loading-bg{position:fixed;inset:0;z-index:70;background:rgba(10,14,12,.82);backdrop-filter:blur(4px);
+    display:none;place-items:center;flex-direction:column}
+  .loading-bg.show{display:grid}
+  .spinner{width:54px;height:54px;border:5px solid rgba(43,191,138,.25);border-top-color:var(--accent);
+    border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 16px}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .loading-bg .ltext{font-weight:700;color:var(--text)}
+  .loading-bg .lsub{color:var(--muted);font-size:13px;margin-top:4px}
+
+  @media(max-width:560px){
+    .logo{font-size:24px}.q-text{font-size:17px}.story{font-size:16px}.stat-row{gap:16px}
+    .gloss-item b{min-width:100px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="logo">🗡️ 鬼滅之刃 英語修行<span class="en">DEMON SLAYER · ENGLISH QUEST</span></div>
+    <div class="tagline">跟著炭治郎修行英文 ｜ 20 道呼吸（關卡）× 單一文法主題 ｜ 難度：國中二～三年級 ｜ 讀完抽 5–7 題，全對才能通關</div>
+  </header>
+
+  <div class="topbar">
+    <div class="hearts" id="hearts">❤️❤️❤️</div>
+    <div class="pbar"><i id="pbarFill"></i></div>
+    <div class="xp">⭐ <span id="xp">0</span> XP</div>
+    <div class="icon-btn" id="soundBtn" title="音效開關">🔊</div>
+    <div class="icon-btn" id="settingsBtn" title="AI 出題設定">⚙️</div>
+  </div>
+
+  <!-- MAP -->
+  <section id="mapView" class="card">
+    <span class="badge">🗺️ 修行之路 20 關</span>
+    <h2 class="level-title">選擇你的「呼吸」修行</h2>
+    <div class="level-sub">每一關都是一段鬼滅劇情，鎖定一個文法主題。通關前一關才能解鎖下一關。<span class="reset-link" id="resetBtn">重置全部進度</span></div>
+    <div class="map-grid" id="mapGrid"></div>
+  </section>
+
+  <!-- READING -->
+  <section id="readView" class="card hidden">
+    <img class="read-cover" id="readCover" alt="關卡封面" onerror="this.style.display='none'">
+    <span class="badge" id="readBadge">📖 第 1 關</span>
+    <h2 class="level-title" id="readTitle"></h2>
+    <div class="level-sub" id="readFocus"></div>
+    <div class="story" id="storyBox"></div>
+    <div class="glossary">
+      <h4>🔑 重點單字 Vocabulary</h4>
+      <div id="glossBox"></div>
+    </div>
+    <div class="grammar">
+      <h4>📐 文法焦點 Grammar Focus</h4>
+      <div id="grammarBox"></div>
+    </div>
+    <div class="ai-row">
+      <label class="switch"><input type="checkbox" id="aiToggle"><span class="slider"></span></label>
+      <span class="ai-label">🤖 AI 即時出題（無限不重複）</span>
+      <span class="ai-note">開啟後，由 Claude 依本關文法主題即時生成題目；需先在 ⚙️ 設定填入你自己的 Anthropic API 金鑰。未填或失敗會自動改用內建題庫。</span>
+      <span class="ai-warn" id="aiKeyWarn"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn ghost" onclick="goMap()">← 返回地圖</button>
+      <div class="spacer"></div>
+      <button class="btn" id="startQuizBtn">開始挑戰 →</button>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quizView" class="card hidden">
+    <div class="q-head">
+      <span class="q-counter" id="qCounter">第 1 / 5 題</span>
+      <span class="badge q-type" id="qType">選擇題</span>
+    </div>
+    <div class="dots" id="dots"></div>
+    <div class="q-text" id="qText"></div>
+    <div class="options" id="optBox"></div>
+    <div class="feedback" id="feedback"></div>
+    <div class="btn-row">
+      <button class="btn ghost" onclick="confirmQuit()">放棄離開</button>
+      <div class="spacer"></div>
+      <button class="btn hidden" id="nextBtn">下一題 →</button>
+    </div>
+  </section>
+
+  <!-- RESULT -->
+  <section id="resultView" class="card hidden">
+    <div class="result">
+      <div class="big" id="resBig">🎉</div>
+      <h2 id="resTitle"></h2>
+      <p id="resMsg"></p>
+      <div class="stat-row">
+        <div class="stat"><div class="num" id="resScore"></div><div class="lbl">答對題數</div></div>
+        <div class="stat"><div class="num" id="resXp"></div><div class="lbl">獲得 XP</div></div>
+        <div class="stat"><div class="num" id="resHearts"></div><div class="lbl">剩餘生命</div></div>
+      </div>
+      <div class="btn-row" style="justify-content:center">
+        <button class="btn ghost" id="resRetry"></button>
+        <button class="btn" id="resNext"></button>
+      </div>
+    </div>
+  </section>
+
+  <footer>鬼滅之刃 英語修行 · 離線單機版 · 進度自動存於瀏覽器 · 角色與世界觀版權屬原作者吾峠呼世晴，本站僅作英語教學練習用途</footer>
+</div>
+<div class="toast" id="toast"></div>
+
+<!-- 設定 Modal -->
+<div class="modal-bg" id="settingsModal">
+  <div class="modal">
+    <h3>⚙️ AI 即時出題設定</h3>
+    <p>填入你<b>自己的 Anthropic API 金鑰</b>，即可讓 Claude 依每關文法主題即時生成全新題目。<br>
+       🔒 金鑰<b>只會存在你這台瀏覽器</b>（localStorage），不會上傳、不會被推上 GitHub。</p>
+    <label for="keyInput">Anthropic API Key</label>
+    <input type="password" id="keyInput" placeholder="sk-ant-..." autocomplete="off">
+    <div class="hint">取得金鑰：console.anthropic.com → API Keys</div>
+    <label for="modelSelect">模型</label>
+    <select id="modelSelect">
+      <option value="claude-haiku-4-5">Claude Haiku 4.5（快速・便宜・推薦）</option>
+      <option value="claude-sonnet-4-6">Claude Sonnet 4.6（更精準）</option>
+      <option value="claude-opus-4-8">Claude Opus 4.8（最強・較慢較貴）</option>
+    </select>
+    <div class="modal-actions">
+      <button class="btn ghost" id="keyClearBtn">清除金鑰</button>
+      <div class="spacer"></div>
+      <button class="btn ghost" id="settingsCloseBtn">取消</button>
+      <button class="btn" id="settingsSaveBtn">儲存</button>
+    </div>
+  </div>
+</div>
+
+<!-- 載入動畫 -->
+<div class="loading-bg" id="loadingBox">
+  <div style="text-align:center">
+    <div class="spinner"></div>
+    <div class="ltext">炭治郎正在出題中…</div>
+    <div class="lsub">Claude 正依本關文法生成新題目</div>
+  </div>
+</div>
+
+<script>
+/* =========================================================================
+   鬼滅之刃 英語修行 — 20 關，每關單一文法主題，難度 國中 2~3 年級。
+   引擎：每關題庫 9~12 題，每次隨機抽 5~7 題、選項打亂、全對才通關。
+   ========================================================================= */
+
+const LEVELS = [
+/* 1 */ {
+  emoji:"🪵", rank:"一般現在式",
+  title:"賣炭的少年 The Charcoal Seller",
+  focus:"文法焦點：一般現在式 Simple Present（習慣與事實）",
+  story:[
+    {en:`Tanjiro <span class="kw" data-t="住">lives</span> in the snowy mountains with his big family.`,zh:`炭治郎和他的大家庭住在白雪皚皚的山上。`},
+    {en:`Every day he <span class="kw" data-t="搬運">carries</span> charcoal down to the town and <span class="kw" data-t="賣">sells</span> it to kind people.`,zh:`每天他把木炭搬下山到鎮上，賣給善良的人們。`},
+    {en:`His sister Nezuko always <span class="kw" data-t="照顧">takes</span> care of the younger children.`,zh:`他的妹妹禰豆子總是照顧弟弟妹妹。`},
+    {en:`"My family is poor, but we <span class="kw" data-t="(感到)">feel</span> happy together," he says with a smile.`,zh:`「我家很窮，但我們在一起很幸福，」他微笑著說。`}
+  ],
+  gloss:[
+    {w:"charcoal",pos:"n.",d:"木炭"},{w:"carry",pos:"v.",d:"搬運、攜帶"},
+    {w:"sell",pos:"v.",d:"賣（過去 sold）"},{w:"take care of",pos:"phr.",d:"照顧"},
+    {w:"poor",pos:"adj.",d:"貧窮的"},{w:"smile",pos:"v./n.",d:"微笑"}
+  ],
+  grammar:[
+    {rule:`<em>一般現在式</em>表示「習慣、反覆動作、長期事實」。標誌詞：<b>every day, always, usually, often</b>。`},
+    {rule:`主詞為第三人稱單數（he/she/it）時，動詞要加 <b>-s/-es</b>：live→<b>lives</b>, sell→<b>sells</b>，子音+y 改 <b>-ies</b>：carry→<b>carries</b>。`},
+    {rule:`否定與疑問用 <b>do/does</b>：He <b>doesn't</b> live here. <b>Does</b> she sell charcoal?`}
+  ],
+  bank:[
+    {t:"選擇題",q:`Tanjiro ____ in the snowy mountains.`,opts:["lives","live","living","lived"],a:0,ex:`第三人稱單數 he → lives。`},
+    {t:"選擇題",q:`Every day he ____ charcoal to the town.`,opts:["carry","carries","is carrying","carried"],a:1,ex:`every day=習慣，carry→carries（子音+y）。`},
+    {t:"填空題",q:`Nezuko always ____ (take) care of the children.`,opts:["takes","take","is taking","took"],a:0,ex:`always=習慣，she→takes。`},
+    {t:"選擇題",q:`____ Tanjiro sell charcoal?`,opts:["Do","Does","Is","Are"],a:1,ex:`第三人稱單數疑問用 Does。`},
+    {t:"選擇題",q:`He ____ live in the city.`,opts:["don't","doesn't","isn't","not"],a:1,ex:`否定第三人稱用 doesn't。`},
+    {t:"是非題",q:`"The sun rises in the east." 用一般現在式是正確的。`,opts:["正確 True","錯誤 False"],a:0,ex:`恆常事實用一般現在式。`},
+    {t:"選擇題",q:`They usually ____ happy together.`,opts:["feels","feel","feeling","is"],a:1,ex:`主詞 they → 原形 feel。`},
+    {t:"選擇題",q:`Which word signals the simple present tense?`,opts:["now","yesterday","every day","right now"],a:2,ex:`every day 是習慣的標誌詞。`},
+    {t:"填空題",q:`My mother ____ (wash) clothes every morning.`,opts:["washes","wash","washing","washed"],a:0,ex:`子音+sh 加 -es；she→washes。`},
+    {t:"是非題",q:`"He sell charcoal every day." 文法正確。`,opts:["正確 True","錯誤 False"],a:1,ex:`第三人稱應為 sells，故錯誤。`},
+    {t:"選擇題",q:`Water ____ at 100°C.`,opts:["boil","boils","is boiling","boiled"],a:1,ex:`科學事實，water→boils。`}
+  ]
+},
+/* 2 */ {
+  emoji:"🌑", rank:"現在進行式",
+  title:"歸來的那一夜 The Night He Returns",
+  focus:"文法焦點：現在進行式 Present Continuous（此刻正在發生）",
+  story:[
+    {en:`The snow <span class="kw" data-t="正在落下">is falling</span> heavily as Tanjiro <span class="kw" data-t="正在爬">is climbing</span> up the mountain.`,zh:`當炭治郎正爬上山時，雪正下得很大。`},
+    {en:`"Why <span class="kw" data-t="正聞到">am I smelling</span> blood?" he thinks. Something is wrong.`,zh:`「為什麼我聞到血的味道？」他想。有些不對勁。`},
+    {en:`At home, his family <span class="kw" data-t="不在呼吸（沒了氣息）">is not moving</span>. A demon <span class="kw" data-t="正在攻擊">is attacking</span> them!`,zh:`家裡，他的家人一動也不動。一隻鬼正在攻擊他們！`},
+    {en:`"Nezuko! Hold on! I <span class="kw" data-t="正帶你去">am taking</span> you to a doctor right now!"`,zh:`「禰豆子！撐住！我現在就帶你去看醫生！」`}
+  ],
+  gloss:[
+    {w:"fall",pos:"v.",d:"落下、掉落"},{w:"climb",pos:"v.",d:"攀爬"},
+    {w:"smell",pos:"v.",d:"聞到、嗅"},{w:"demon",pos:"n.",d:"鬼、惡魔"},
+    {w:"attack",pos:"v.",d:"攻擊"},{w:"hold on",pos:"phr.",d:"撐住、堅持"}
+  ],
+  grammar:[
+    {rule:`<em>現在進行式</em>：<b>be (am/is/are) + V-ing</b>，表示「此刻正在發生」。標誌詞：<b>now, right now, look!, listen!</b>。`},
+    {rule:`V-ing 拼字：fall→falling, climb→climbing；字尾 e 去 e：take→<b>taking</b>；短母音重複尾子音：run→<b>running</b>。`},
+    {rule:`否定：be + <b>not</b> + V-ing；疑問：be 移到句首。例：<b>Is</b> a demon <b>attacking</b> them?`}
+  ],
+  bank:[
+    {t:"選擇題",q:`The snow ____ heavily right now.`,opts:["falls","is falling","fall","fell"],a:1,ex:`right now → is falling。`},
+    {t:"選擇題",q:`Look! Tanjiro ____ up the mountain.`,opts:["climbs","is climbing","climb","climbed"],a:1,ex:`Look! → 進行式 is climbing。`},
+    {t:"填空題",q:`A demon ____ (attack) his family now!`,opts:["is attacking","attacks","attack","attacked"],a:0,ex:`now → is attacking。`},
+    {t:"選擇題",q:`Correct V-ing form of "take" is:`,opts:["takeing","taking","takking","takeng"],a:1,ex:`字尾 e 去掉再加 ing → taking。`},
+    {t:"選擇題",q:`"I ____ you to a doctor right now!"`,opts:["take","am taking","takes","took"],a:1,ex:`I + am taking（此刻）。`},
+    {t:"是非題",q:`"They are not moving." 是現在進行式的否定句。`,opts:["正確 True","錯誤 False"],a:0,ex:`be + not + V-ing 的否定，正確。`},
+    {t:"選擇題",q:`____ a demon attacking the family?`,opts:["Do","Does","Is","Are"],a:2,ex:`單數主詞 demon → Is ... attacking?`},
+    {t:"選擇題",q:`The V-ing form of "run" is:`,opts:["runing","running","running","runed"],a:1,ex:`短母音重複尾子音 → running。`},
+    {t:"是非題",q:`"He is smell blood." 文法正確。`,opts:["正確 True","錯誤 False"],a:1,ex:`應為 is smelling，故錯誤。`},
+    {t:"選擇題",q:`Which signals the present continuous?`,opts:["every night","usually","right now","often"],a:2,ex:`right now 是進行式標誌。`},
+    {t:"選擇題",q:`Listen! Nezuko ____ strangely.`,opts:["breathes","is breathing","breathe","breathed"],a:1,ex:`Listen! → 進行式 is breathing。`}
+  ]
+},
+/* 3 */ {
+  emoji:"🩸", rank:"一般過去式",
+  title:"消失的家人 The Family He Lost",
+  focus:"文法焦點：一般過去式 Simple Past（規則與不規則動詞）",
+  story:[
+    {en:`That night, a demon <span class="kw" data-t="殺害">killed</span> almost everyone in Tanjiro's family.`,zh:`那一夜，一隻鬼幾乎殺死了炭治郎全家。`},
+    {en:`He <span class="kw" data-t="抱起（不規則）">carried</span> Nezuko on his back and <span class="kw" data-t="跑（不規則）">ran</span> through the deep snow.`,zh:`他把禰豆子背在背上，在深雪中奔跑。`},
+    {en:`Suddenly Nezuko <span class="kw" data-t="變成（不規則）">became</span> a demon and <span class="kw" data-t="攻擊（過去）">attacked</span> him.`,zh:`突然間，禰豆子變成了鬼並攻擊他。`},
+    {en:`But deep inside, she still <span class="kw" data-t="(認得，不規則 know→knew)">knew</span> her brother, so she <span class="kw" data-t="停下（過去）">stopped</span>.`,zh:`但在內心深處，她仍認得哥哥，所以她停了下來。`}
+  ],
+  gloss:[
+    {w:"kill",pos:"v.",d:"殺死（過去 killed）"},{w:"run",pos:"v.",d:"跑（過去 ran）"},
+    {w:"become",pos:"v.",d:"變成（過去 became）"},{w:"deep",pos:"adj.",d:"深的"},
+    {w:"inside",pos:"adv./n.",d:"在內部、內心"},{w:"stop",pos:"v.",d:"停止（過去 stopped）"}
+  ],
+  grammar:[
+    {rule:`<em>一般過去式</em>表示「過去發生且已結束」。標誌詞：<b>yesterday, last night, ago, that night, when</b>。`},
+    {rule:`規則動詞加 <b>-ed</b>：kill→killed, attack→attacked；重複尾子音：stop→<b>stopped</b>；子音+y→<b>-ied</b>：carry→carried。`},
+    {rule:`不規則動詞要背：run→<b>ran</b>, become→<b>became</b>, know→<b>knew</b>, see→saw, take→took。`}
+  ],
+  bank:[
+    {t:"選擇題",q:`That night, a demon ____ his family.`,opts:["kills","killed","kill","is killing"],a:1,ex:`that night → 過去式 killed。`},
+    {t:"選擇題",q:`He ____ through the deep snow. (run)`,opts:["runned","ran","run","runs"],a:1,ex:`run 的不規則過去式是 ran。`},
+    {t:"填空題",q:`Nezuko ____ (become) a demon.`,opts:["became","becomed","becomes","become"],a:0,ex:`become→became。`},
+    {t:"選擇題",q:`She still ____ her brother. (know)`,opts:["knowed","knew","knows","known"],a:1,ex:`know→knew。`},
+    {t:"選擇題",q:`Past tense of "stop" is:`,opts:["stoped","stopped","stopt","stops"],a:1,ex:`短母音重複尾子音 → stopped。`},
+    {t:"是非題",q:`"He carried Nezuko on his back." 文法正確。`,opts:["正確 True","錯誤 False"],a:0,ex:`carry→carried，正確。`},
+    {t:"選擇題",q:`Yesterday they ____ a demon in the forest. (see)`,opts:["seed","saw","seen","sees"],a:1,ex:`see→saw。`},
+    {t:"選擇題",q:`____ Tanjiro cry that night?`,opts:["Did","Does","Do","Was"],a:0,ex:`過去式疑問用 Did + 原形。`},
+    {t:"填空題",q:`The demon ____ (attack) him. (規則)`,opts:["attacked","attackt","attacks","attack"],a:0,ex:`規則加 -ed → attacked。`},
+    {t:"是非題",q:`"She knowed his face." 文法正確。`,opts:["正確 True","錯誤 False"],a:1,ex:`know 是不規則，應為 knew，故錯誤。`},
+    {t:"選擇題",q:`Past tense of "take" is:`,opts:["taked","took","taken","takes"],a:1,ex:`take→took。`}
+  ]
+},
+/* 4 */ {
+  emoji:"❄️", rank:"過去進行式",
+  title:"當水柱出現時 When the Water Hashira Came",
+  focus:"文法焦點：過去進行式 Past Continuous（過去某時正在進行）",
+  story:[
+    {en:`While Tanjiro <span class="kw" data-t="正在保護">was protecting</span> Nezuko, a swordsman appeared in the snow.`,zh:`當炭治郎正在保護禰豆子時，一名劍士出現在雪中。`},
+    {en:`It was Giyu. He <span class="kw" data-t="正在握著">was holding</span> his sword, ready to kill the demon girl.`,zh:`那是義勇。他正握著刀，準備殺死那名鬼少女。`},
+    {en:`"Why <span class="kw" data-t="(過去某時)正在保護">were you protecting</span> a demon?" Giyu asked coldly.`,zh:`「你為什麼正在保護一隻鬼？」義勇冷冷地問。`},
+    {en:`While the two <span class="kw" data-t="正在說話">were talking</span>, Nezuko was standing in front of her brother.`,zh:`當兩人正在交談時，禰豆子站在哥哥面前護著他。`}
+  ],
+  gloss:[
+    {w:"protect",pos:"v.",d:"保護"},{w:"swordsman",pos:"n.",d:"劍士"},
+    {w:"appear",pos:"v.",d:"出現"},{w:"hold",pos:"v.",d:"握住、拿（過去 held）"},
+    {w:"coldly",pos:"adv.",d:"冷淡地"},{w:"in front of",pos:"phr.",d:"在…前面"}
+  ],
+  grammar:[
+    {rule:`<em>過去進行式</em>：<b>was/were + V-ing</b>，表示「過去某個時間點正在進行的動作」。`},
+    {rule:`常與 <b>while</b>（當…的時候）連用，或描述「某動作進行中，另一動作發生」：<b>While</b> he was eating, the phone rang.`},
+    {rule:`I/he/she/it 用 <b>was</b>；you/we/they 用 <b>were</b>。疑問：Was/Were 移到句首。`}
+  ],
+  bank:[
+    {t:"選擇題",q:`While Tanjiro ____ Nezuko, a swordsman appeared.`,opts:["protects","was protecting","protected","is protecting"],a:1,ex:`while + 過去進行式 was protecting。`},
+    {t:"選擇題",q:`Giyu ____ his sword. (hold, 過去進行)`,opts:["was holding","were holding","held","holds"],a:0,ex:`he → was holding。`},
+    {t:"填空題",q:`"Why ____ you ____ a demon?" (protect)`,opts:["were / protecting","was / protecting","did / protect","are / protecting"],a:0,ex:`you → were + V-ing。`},
+    {t:"選擇題",q:`While the two ____ , Nezuko stood still.`,opts:["was talking","were talking","talk","talked"],a:1,ex:`the two(複數) → were talking。`},
+    {t:"是非題",q:`"I was running when it started to rain." 文法正確。`,opts:["正確 True","錯誤 False"],a:0,ex:`過去進行 + 過去簡單，正確。`},
+    {t:"選擇題",q:`They ____ for the demon all night.`,opts:["was searching","were searching","searched","search"],a:1,ex:`they → were searching。`},
+    {t:"選擇題",q:`____ she crying when you saw her?`,opts:["Did","Was","Were","Is"],a:1,ex:`she → Was ... crying?`},
+    {t:"填空題",q:`While we ____ (eat), the demon broke in.`,opts:["were eating","was eating","ate","eat"],a:0,ex:`we → were eating。`},
+    {t:"是非題",q:`"He were holding a sword." 文法正確。`,opts:["正確 True","錯誤 False"],a:1,ex:`he 應用 was，故錯誤。`},
+    {t:"選擇題",q:`The snow ____ while they fought.`,opts:["was falling","were falling","falls","fell"],a:0,ex:`snow → was falling。`},
+    {t:"選擇題",q:`I ____ TV when my brother came home.`,opts:["was watching","were watching","watched","watch"],a:0,ex:`I → was watching。`}
+  ]
+},
+/* 5 */ {
+  emoji:"🎯", rank:"未來式",
+  title:"立下的誓言 The Vow He Makes",
+  focus:"文法焦點：未來式 Will 與 Be going to",
+  story:[
+    {en:`"I <span class="kw" data-t="將會把(她)變回">will turn</span> Nezuko back into a human," Tanjiro promised.`,zh:`「我一定要把禰豆子變回人類，」炭治郎發誓。`},
+    {en:`Giyu told him, "If you are serious, you <span class="kw" data-t="將要去找">are going to</span> find a man named Urokodaki."`,zh:`義勇告訴他：「如果你是認真的，你要去找一個叫鱗瀧的人。」`},
+    {en:`"I <span class="kw" data-t="不會放棄">will not give up</span>. I <span class="kw" data-t="打算變強">am going to become</span> a Demon Slayer!"`,zh:`「我不會放棄。我要成為一名鬼殺隊士！」`},
+    {en:`"One day, I <span class="kw" data-t="將找到">will find</span> the demon who did this and defeat him."`,zh:`「總有一天，我會找到做這件事的鬼，並打敗他。」`}
+  ],
+  gloss:[
+    {w:"turn ... back into",pos:"phr.",d:"把…變回"},{w:"promise",pos:"v.",d:"承諾、發誓"},
+    {w:"serious",pos:"adj.",d:"認真的、嚴肅的"},{w:"give up",pos:"phr.",d:"放棄"},
+    {w:"Demon Slayer",pos:"n.",d:"鬼殺隊士、滅鬼者"},{w:"defeat",pos:"v.",d:"打敗"}
+  ],
+  grammar:[
+    {rule:`<em>will + 原形動詞</em>：表「當下的決定、承諾、預測」。否定 <b>will not = won't</b>。例：I <b>will</b> find him.`},
+    {rule:`<em>be going to + 原形動詞</em>：表「已有的計畫、打算」或「有跡象的預測」。例：I'm <b>going to</b> become a slayer.`},
+    {rule:`兩者都接 <b>原形動詞</b>。判斷：臨時決定/承諾→will；事先計畫→be going to。`}
+  ],
+  bank:[
+    {t:"選擇題",q:`"I ____ turn Nezuko back into a human."`,opts:["will","am going","going to","will to"],a:0,ex:`承諾用 will + 原形。`},
+    {t:"選擇題",q:`"You ____ find a man named Urokodaki." (已安排)`,opts:["will to","are going to","going to","will going"],a:1,ex:`既定安排用 be going to。`},
+    {t:"填空題",q:`"I ____ (not give up)!"`,opts:["will not give up","am not going give up","not will give up","won't gave up"],a:0,ex:`will not = won't + 原形 give up。`},
+    {t:"選擇題",q:`After "will", the verb must be:`,opts:["原形 base form","V-ing","過去式","to + V"],a:0,ex:`will + 原形動詞。`},
+    {t:"選擇題",q:`Look at those clouds! It ____ rain.`,opts:["will","is going to","goes to","wills"],a:1,ex:`有跡象的預測用 be going to。`},
+    {t:"是非題",q:`"I am going to become a slayer." 文法正確。`,opts:["正確 True","錯誤 False"],a:0,ex:`be going to + 原形，正確。`},
+    {t:"選擇題",q:`"The phone is ringing." "OK, I ____ answer it." (臨時決定)`,opts:["am going to","will","going to","would"],a:1,ex:`臨時決定用 will。`},
+    {t:"填空題",q:`"One day I ____ (find) him."`,opts:["will find","will found","am find","will finding"],a:0,ex:`will + 原形 find。`},
+    {t:"是非題",q:`"He will defeats the demon." 文法正確。`,opts:["正確 True","錯誤 False"],a:1,ex:`will 後接原形 defeat，故錯誤。`},
+    {t:"選擇題",q:`We ____ visit grandma next week. (計畫已定)`,opts:["will","are going to","going to","wills"],a:1,ex:`已計畫用 be going to。`},
+    {t:"選擇題",q:`"____ you help me carry this?"`,opts:["Will","Are going to","Do will","Going"],a:0,ex:`請求用 Will you...?`}
+  ]
+},
+/* 6 */ {
+  emoji:"⛰️", rank:"現在完成式",
+  title:"鱗瀧的試煉 Urokodaki's Training",
+  focus:"文法焦點：現在完成式 Present Perfect（have/has + p.p.）",
+  story:[
+    {en:`Tanjiro <span class="kw" data-t="已經訓練">has trained</span> under Urokodaki for almost two years.`,zh:`炭治郎已經在鱗瀧門下訓練了將近兩年。`},
+    {en:`"<span class="kw" data-t="你曾經…嗎">Have you ever</span> cut a giant rock with a sword?" his master asked.`,zh:`「你曾經用刀劈開巨石嗎？」他的師父問。`},
+    {en:`"Not yet, but I <span class="kw" data-t="已經學會">have learned</span> Water Breathing," Tanjiro answered.`,zh:`「還沒，但我已經學會了水之呼吸，」炭治郎回答。`},
+    {en:`Finally, one morning, he <span class="kw" data-t="已經切開（完成）">has cut</span> the rock in two. His training is complete.`,zh:`終於，某個早晨，他把巨石一刀兩斷。他的修行完成了。`}
+  ],
+  gloss:[
+    {w:"train",pos:"v.",d:"訓練（p.p. trained）"},{w:"master",pos:"n.",d:"師父、大師"},
+    {w:"giant",pos:"adj.",d:"巨大的"},{w:"breathing",pos:"n.",d:"呼吸（法）"},
+    {w:"complete",pos:"adj.",d:"完成的、完整的"},{w:"finally",pos:"adv.",d:"終於"}
+  ],
+  grammar:[
+    {rule:`<em>現在完成式</em>：<b>have/has + 過去分詞(p.p.)</b>，表「經驗」或「過去發生、影響到現在」。`},
+    {rule:`標誌詞：<b>already, yet, ever, never, just, since, for</b>。例：I <b>have lived</b> here <b>for</b> two years.`},
+    {rule:`he/she/it 用 <b>has</b>，其餘 <b>have</b>。不規則 p.p.：cut→<b>cut</b>, learn→learned, see→seen, do→done, eat→eaten。`}
+  ],
+  bank:[
+    {t:"選擇題",q:`Tanjiro ____ for almost two years.`,opts:["has trained","have trained","trained","is training"],a:0,ex:`he + has + p.p.，for → 完成式。`},
+    {t:"選擇題",q:`"Have you ever ____ a giant rock?" (cut)`,opts:["cut","cutted","cuts","cutting"],a:0,ex:`cut 的 p.p. 仍是 cut。`},
+    {t:"填空題",q:`"I ____ (learn) Water Breathing."`,opts:["have learned","has learned","learned","am learning"],a:0,ex:`I → have learned。`},
+    {t:"選擇題",q:`Which word goes with the present perfect?`,opts:["yesterday","already","ago","last week"],a:1,ex:`already 屬完成式；其餘是過去式。`},
+    {t:"選擇題",q:`The p.p. of "do" is:`,opts:["did","done","doing","does"],a:1,ex:`do→did→done。`},
+    {t:"是非題",q:`"She has finished her training." 文法正確。`,opts:["正確 True","錯誤 False"],a:0,ex:`she + has + p.p.，正確。`},
+    {t:"選擇題",q:`"He hasn't woken up ____." (否定句尾)`,opts:["already","yet","just","ever"],a:1,ex:`否定句尾用 yet。`},
+    {t:"填空題",q:`We ____ (live) here ____ 2010.`,opts:["have lived / since","has lived / for","lived / since","have live / since"],a:0,ex:`since + 時間點，we → have lived。`},
+    {t:"是非題",q:`"I have saw a demon." 文法正確。`,opts:["正確 True","錯誤 False"],a:1,ex:`see 的 p.p. 是 seen，故錯誤。`},
+    {t:"選擇題",q:`"They have ____ eaten dinner." (剛剛)`,opts:["yet","just","ago","never"],a:1,ex:`just = 剛剛，用於完成式。`},
+    {t:"選擇題",q:`The p.p. of "eat" is:`,opts:["ate","eaten","eated","eating"],a:1,ex:`eat→ate→eaten。`}
+  ]
+},
+/* 7 */ {
+  emoji:"🏔️", rank:"形容詞比較級",
+  title:"最終選別 The Final Selection",
+  focus:"文法焦點：形容詞比較級 Comparative（-er / more ... than）",
+  story:[
+    {en:`On Mount Fujikasane, the demons are <span class="kw" data-t="更危險的">more dangerous</span> than anywhere else.`,zh:`在藤襲山上，這裡的鬼比任何地方都更危險。`},
+    {en:`This demon is <span class="kw" data-t="更高大的">taller</span> and <span class="kw" data-t="更強壯的">stronger</span> than Tanjiro.`,zh:`這隻鬼比炭治郎更高大、更強壯。`},
+    {en:`But Tanjiro is <span class="kw" data-t="更快的">faster</span> and <span class="kw" data-t="更聰明的">smarter</span> than the demon thinks.`,zh:`但炭治郎比那隻鬼想的更快、更聰明。`},
+    {en:`"To survive, I must be <span class="kw" data-t="更勇敢的">braver</span> than ever before," he tells himself.`,zh:`「為了活下來，我必須比以往任何時候都更勇敢，」他對自己說。`}
+  ],
+  gloss:[
+    {w:"dangerous",pos:"adj.",d:"危險的"},{w:"tall",pos:"adj.",d:"高的"},
+    {w:"strong",pos:"adj.",d:"強壯的"},{w:"smart",pos:"adj.",d:"聰明的"},
+    {w:"survive",pos:"v.",d:"存活、倖存"},{w:"brave",pos:"adj.",d:"勇敢的"}
+  ],
+  grammar:[
+    {rule:`<em>比較級</em>用來比較兩者，後接 <b>than</b>。短形容詞 + <b>-er</b>：tall→taller, fast→faster。`},
+    {rule:`字尾 e 加 r：brave→<b>braver</b>；子音+y→<b>-ier</b>：happy→happier；短母音重複尾子音：big→<b>bigger</b>。`},
+    {rule:`長形容詞（2 音節以上）用 <b>more</b>：dangerous→<b>more dangerous</b>。不規則：good→<b>better</b>, bad→<b>worse</b>。`}
+  ],
+  bank:[
+    {t:"選擇題",q:`The demons here are ____ than anywhere else. (dangerous)`,opts:["dangerouser","more dangerous","most dangerous","danger"],a:1,ex:`長形容詞用 more dangerous。`},
+    {t:"選擇題",q:`This demon is ____ than Tanjiro. (tall)`,opts:["taller","more tall","tallest","tall"],a:0,ex:`tall→taller。`},
+    {t:"填空題",q:`Tanjiro is ____ (fast) than the demon thinks.`,opts:["faster","more fast","fastest","fast"],a:0,ex:`fast→faster。`},
+    {t:"選擇題",q:`Comparative of "brave" is:`,opts:["braver","more brave","bravest","braveer"],a:0,ex:`字尾 e → 加 r，braver。`},
+    {t:"選擇題",q:`Comparative of "happy" is:`,opts:["happyer","happier","more happy","happiest"],a:1,ex:`子音+y → happier。`},
+    {t:"是非題",q:`"He is stronger than me." 文法正確。`,opts:["正確 True","錯誤 False"],a:0,ex:`strong→stronger + than，正確。`},
+    {t:"選擇題",q:`Comparative of "good" is:`,opts:["gooder","more good","better","best"],a:2,ex:`不規則：good→better。`},
+    {t:"填空題",q:`This sword is ____ (big) than that one.`,opts:["bigger","more big","biggest","biger"],a:0,ex:`短母音重複尾子音 → bigger。`},
+    {t:"是非題",q:`"This is more better than before." 文法正確。`,opts:["正確 True","錯誤 False"],a:1,ex:`better 已是比較級，不可加 more，故錯誤。`},
+    {t:"選擇題",q:`"I must be ____ than before." (brave)`,opts:["braver","more brave","bravest","brave"],a:0,ex:`braver。`},
+    {t:"選擇題",q:`Comparative of "bad" is:`,opts:["badder","more bad","worse","worst"],a:2,ex:`不規則：bad→worse。`}
+  ]
+},
+/* 8 */ {
+  emoji:"👹", rank:"形容詞最高級",
+  title:"手鬼的記憶 The Hand Demon",
+  focus:"文法焦點：形容詞最高級 Superlative（the -est / the most）",
+  story:[
+    {en:`The Hand Demon was <span class="kw" data-t="最可怕的">the scariest</span> enemy Tanjiro had ever met.`,zh:`手鬼是炭治郎遇過最可怕的敵人。`},
+    {en:`"I have eaten the <span class="kw" data-t="最多的">most</span> students of Urokodaki," the demon laughed.`,zh:`「我吃掉了最多鱗瀧的弟子，」那隻鬼大笑。`},
+    {en:`But Tanjiro used <span class="kw" data-t="最強的">the strongest</span> move he knew: Water Breathing.`,zh:`但炭治郎使出他所知最強的招式：水之呼吸。`},
+    {en:`That night, he became <span class="kw" data-t="最勇敢的">the bravest</span> warrior on the mountain.`,zh:`那一夜，他成了山上最勇敢的戰士。`}
+  ],
+  gloss:[
+    {w:"scary",pos:"adj.",d:"可怕的"},{w:"enemy",pos:"n.",d:"敵人"},
+    {w:"student",pos:"n.",d:"學生、弟子"},{w:"move",pos:"n.",d:"招式、動作"},
+    {w:"warrior",pos:"n.",d:"戰士"},{w:"laugh",pos:"v.",d:"大笑"}
+  ],
+  grammar:[
+    {rule:`<em>最高級</em>用於三者以上「最…」，前面通常加 <b>the</b>。短形容詞 + <b>-est</b>：tall→the tallest。`},
+    {rule:`字尾變化：scary→<b>the scariest</b>, big→<b>the biggest</b>, brave→<b>the bravest</b>。`},
+    {rule:`長形容詞用 <b>the most</b>：the most dangerous。不規則：good→<b>the best</b>, bad→<b>the worst</b>, many/much→<b>the most</b>。`}
+  ],
+  bank:[
+    {t:"選擇題",q:`The Hand Demon was ____ enemy he had ever met. (scary)`,opts:["the scariest","the most scary","scarier","scary"],a:0,ex:`scary→the scariest。`},
+    {t:"選擇題",q:`Tanjiro used ____ move he knew. (strong)`,opts:["the strongest","the most strong","stronger","strong"],a:0,ex:`strong→the strongest。`},
+    {t:"填空題",q:`He became ____ (brave) warrior on the mountain.`,opts:["the bravest","the most brave","braver","brave"],a:0,ex:`brave→the bravest。`},
+    {t:"選擇題",q:`Superlative of "dangerous" is:`,opts:["the dangerousest","the most dangerous","more dangerous","dangerousest"],a:1,ex:`長形容詞用 the most dangerous。`},
+    {t:"選擇題",q:`Superlative of "good" is:`,opts:["the goodest","the best","better","the most good"],a:1,ex:`不規則：good→the best。`},
+    {t:"是非題",q:`"She is the tallest in the class." 文法正確。`,opts:["正確 True","錯誤 False"],a:0,ex:`tall→the tallest，正確。`},
+    {t:"選擇題",q:`Superlative of "big" is:`,opts:["the bigest","the biggest","the most big","bigger"],a:1,ex:`重複尾子音 → the biggest。`},
+    {t:"填空題",q:`It was ____ (happy) day of his life.`,opts:["the happiest","the most happy","happier","happy"],a:0,ex:`happy→the happiest。`},
+    {t:"是非題",q:`"He is the most strongest." 文法正確。`,opts:["正確 True","錯誤 False"],a:1,ex:`the strongest 已是最高級，不可加 most，故錯誤。`},
+    {t:"選擇題",q:`Superlative of "bad" is:`,opts:["the baddest","the worst","worse","the most bad"],a:1,ex:`不規則：bad→the worst。`},
+    {t:"選擇題",q:`"This is ____ move of all." (powerful)`,opts:["the most powerful","the powerfulest","more powerful","powerful"],a:0,ex:`長形容詞 → the most powerful。`}
+  ]
+},
+/* 9 */ {
+  emoji:"💨", rank:"情態助動詞 can/could",
+  title:"全集中・水之呼吸 Total Concentration",
+  focus:"文法焦點：情態助動詞 Can / Could（能力與請求）",
+  story:[
+    {en:`"I <span class="kw" data-t="能夠使用">can use</span> ten forms of Water Breathing now," Tanjiro said proudly.`,zh:`「我現在能使出水之呼吸的十個招式，」炭治郎自豪地說。`},
+    {en:`When he was younger, he <span class="kw" data-t="無法（過去能力）">couldn't</span> hold his breath for long.`,zh:`他年紀更小時，無法長時間屏住呼吸。`},
+    {en:`"<span class="kw" data-t="(請求)你可以…嗎">Could you</span> show me the eleventh form, master?" he asked politely.`,zh:`「師父，您可以教我第十一個招式嗎？」他禮貌地問。`},
+    {en:`"Anyone <span class="kw" data-t="能夠">can</span> become strong if they never stop training," Urokodaki replied.`,zh:`「只要永不停止訓練，任何人都能變強，」鱗瀧回答。`}
+  ],
+  gloss:[
+    {w:"form",pos:"n.",d:"招式、形式"},{w:"proudly",pos:"adv.",d:"自豪地"},
+    {w:"hold one's breath",pos:"phr.",d:"屏住呼吸"},{w:"politely",pos:"adv.",d:"有禮貌地"},
+    {w:"anyone",pos:"pron.",d:"任何人"},{w:"never",pos:"adv.",d:"從不"}
+  ],
+  grammar:[
+    {rule:`<em>can</em>：表「現在的能力」或「許可」，後接<b>原形動詞</b>。例：I <b>can</b> swim. 否定 <b>cannot/can't</b>。`},
+    {rule:`<em>could</em>：can 的過去式，表「過去的能力」；也用於<b>客氣的請求</b>。例：When I was 5, I <b>could</b> not read. / <b>Could</b> you help me?`},
+    {rule:`情態助動詞後一律接 <b>原形動詞</b>，且不隨主詞變化（沒有 cans）。`}
+  ],
+  bank:[
+    {t:"選擇題",q:`"I ____ use ten forms now."`,opts:["can","cans","could","am can"],a:0,ex:`現在能力用 can + 原形。`},
+    {t:"選擇題",q:`When he was young, he ____ hold his breath for long.`,opts:["can't","couldn't","cannot","don't"],a:1,ex:`過去能力的否定用 couldn't。`},
+    {t:"填空題",q:`"____ you show me the next form, please?" (客氣請求)`,opts:["Could","Can to","Do","Are"],a:0,ex:`客氣請求用 Could you...?`},
+    {t:"選擇題",q:`After "can", the verb must be:`,opts:["原形 base form","V-ing","過去式","to + V"],a:0,ex:`情態助動詞接原形。`},
+    {t:"選擇題",q:`"Anyone ____ become strong with training."`,opts:["can","cans","could to","can to"],a:0,ex:`can + 原形 become。`},
+    {t:"是非題",q:`"She can swims very fast." 文法正確。`,opts:["正確 True","錯誤 False"],a:1,ex:`can 後接原形 swim，故錯誤。`},
+    {t:"選擇題",q:`Negative of "can" is:`,opts:["cann't","can't","cans not","don't can"],a:1,ex:`can not 縮寫 can't。`},
+    {t:"填空題",q:`Last year I ____ (not) speak English well.`,opts:["couldn't","can't","don't","wasn't"],a:0,ex:`過去能力否定用 couldn't。`},
+    {t:"是非題",q:`"Could you open the door?" 是客氣的請求。`,opts:["正確 True","錯誤 False"],a:0,ex:`Could you...? 是客氣請求，正確。`},
+    {t:"選擇題",q:`"____ I borrow your pen?" (請求許可)`,opts:["Can","Cans","Do can","Am"],a:0,ex:`Can I...? 請求許可。`},
+    {t:"選擇題",q:`"Birds ____ fly, but penguins ____."`,opts:["can / can't","cans / can","could / can","can / cans"],a:0,ex:`能力 can；否定 can't。`}
+  ]
+},
+/* 10 */ {
+  emoji:"📜", rank:"情態助動詞 must/should",
+  title:"鬼殺隊的規矩 The Corps' Rules",
+  focus:"文法焦點：情態助動詞 Must / Have to / Should（義務與建議）",
+  story:[
+    {en:`"As a Demon Slayer, you <span class="kw" data-t="必須（義務）">must</span> protect humans with your life," the leader said.`,zh:`「身為鬼殺隊士，你必須用生命保護人類，」隊長說。`},
+    {en:`"You <span class="kw" data-t="必須（外在規定）">have to</span> wear the uniform and carry a Nichirin sword."`,zh:`「你必須穿上隊服並佩帶日輪刀。」`},
+    {en:`"You <span class="kw" data-t="不可以（禁止）">must not</span> let any demon hurt the people."`,zh:`「你絕不可以讓任何鬼傷害人們。」`},
+    {en:`"You <span class="kw" data-t="應該（建議）">should</span> rest before every mission," Shinobu added kindly.`,zh:`「每次任務前你應該好好休息，」忍親切地補充。`}
+  ],
+  gloss:[
+    {w:"protect",pos:"v.",d:"保護"},{w:"uniform",pos:"n.",d:"制服、隊服"},
+    {w:"Nichirin sword",pos:"n.",d:"日輪刀"},{w:"hurt",pos:"v.",d:"傷害"},
+    {w:"rest",pos:"v./n.",d:"休息"},{w:"mission",pos:"n.",d:"任務"}
+  ],
+  grammar:[
+    {rule:`<em>must</em>：表「強烈義務、必須」（說話者的要求）。<b>must not</b> = 禁止「絕不可以」。`},
+    {rule:`<em>have to / has to</em>：表「外在規定的必須」。否定 <b>don't have to</b> = 「不必」（沒有 must not 的禁止意味）。`},
+    {rule:`<em>should</em>：表「建議、應該」，語氣較弱。三者後面都接 <b>原形動詞</b>。`}
+  ],
+  bank:[
+    {t:"選擇題",q:`"You ____ protect humans with your life." (強烈義務)`,opts:["must","should","have","can"],a:0,ex:`強烈義務用 must。`},
+    {t:"選擇題",q:`"You ____ let any demon hurt people." (禁止)`,opts:["don't have to","must not","should not have","can't to"],a:1,ex:`禁止用 must not。`},
+    {t:"填空題",q:`"You ____ rest before a mission." (建議)`,opts:["should","must not","have","can't"],a:0,ex:`建議用 should。`},
+    {t:"選擇題",q:`After "must", the verb is:`,opts:["原形 base form","V-ing","to + V","過去式"],a:0,ex:`must + 原形。`},
+    {t:"選擇題",q:`"He ____ wear a uniform." (he, 外在規定)`,opts:["have to","has to","musts","shoulds"],a:1,ex:`he → has to。`},
+    {t:"是非題",q:`"must not" 表示「禁止、絕不可以」。`,opts:["正確 True","錯誤 False"],a:0,ex:`must not = 禁止，正確。`},
+    {t:"選擇題",q:`"It's a holiday, so you ____ go to school." (不必)`,opts:["must not","don't have to","should not","can't"],a:1,ex:`「不必」用 don't have to。`},
+    {t:"填空題",q:`"You ____ (should) see a doctor." (建議就醫)`,opts:["should","must not","have to not","can"],a:0,ex:`建議用 should。`},
+    {t:"是非題",q:`"You must to carry a sword." 文法正確。`,opts:["正確 True","錯誤 False"],a:1,ex:`must 後不加 to，故錯誤。`},
+    {t:"選擇題",q:`"Students ____ be quiet in the library." (規定)`,opts:["must","should not","don't have to","can't"],a:0,ex:`規定義務用 must。`},
+    {t:"選擇題",q:`"don't have to" 的意思是：`,opts:["禁止","不必、不需要","應該","一定要"],a:1,ex:`don't have to = 不必。`}
+  ]
+},
+/* 11 */ {
+  emoji:"🩹", rank:"被動語態",
+  title:"蝴蝶屋的療傷 Healing at the Butterfly Estate",
+  focus:"文法焦點：被動語態 Passive Voice（be + p.p.）",
+  story:[
+    {en:`After the battle, Tanjiro <span class="kw" data-t="被帶到">was taken</span> to the Butterfly Estate.`,zh:`戰鬥之後，炭治郎被帶到了蝴蝶屋。`},
+    {en:`His wounds <span class="kw" data-t="被治療">were treated</span> by Shinobu and her kind helpers.`,zh:`他的傷口由忍和她善良的助手們治療。`},
+    {en:`Special medicine <span class="kw" data-t="被製作">is made</span> here from rare mountain flowers.`,zh:`這裡用稀有的山花製作特殊的藥。`},
+    {en:`"You <span class="kw" data-t="將被訓練">will be trained</span> again once your body is strong," Shinobu smiled.`,zh:`「等你身體強壯了，你會再次接受訓練，」忍微笑著說。`}
+  ],
+  gloss:[
+    {w:"battle",pos:"n.",d:"戰鬥"},{w:"wound",pos:"n.",d:"傷口"},
+    {w:"treat",pos:"v.",d:"治療（p.p. treated）"},{w:"medicine",pos:"n.",d:"藥"},
+    {w:"rare",pos:"adj.",d:"稀有的"},{w:"once",pos:"conj.",d:"一旦、當…之後"}
+  ],
+  grammar:[
+    {rule:`<em>被動語態</em>：<b>be + 過去分詞(p.p.)</b>，強調「動作的承受者」。動作執行者用 <b>by</b> 帶出。`},
+    {rule:`主動→被動：They treated him. → He <b>was treated</b> (by them). be 動詞依時態變化。`},
+    {rule:`現在被動 am/is/are + p.p.；過去被動 was/were + p.p.；未來被動 <b>will be</b> + p.p.。`}
+  ],
+  bank:[
+    {t:"選擇題",q:`Tanjiro ____ to the Butterfly Estate. (take, 過去被動)`,opts:["took","was taken","is taking","takes"],a:1,ex:`被動 was + p.p. taken。`},
+    {t:"選擇題",q:`His wounds ____ by Shinobu. (treat, 過去被動)`,opts:["were treated","treated","are treating","treat"],a:0,ex:`複數主詞 → were treated。`},
+    {t:"填空題",q:`Medicine ____ (make) here. (現在被動)`,opts:["is made","makes","is making","made"],a:0,ex:`被動 is made。`},
+    {t:"選擇題",q:`"You ____ again later." (train, 未來被動)`,opts:["will train","will be trained","are training","train"],a:1,ex:`未來被動 will be + p.p.。`},
+    {t:"選擇題",q:`Passive of "They built the house." is:`,opts:["The house built.","The house was built.","The house is build.","The house builds."],a:1,ex:`過去被動 was built。`},
+    {t:"是非題",q:`"The demon was defeated by the hero." 是被動語態。`,opts:["正確 True","錯誤 False"],a:0,ex:`was + p.p. = 被動，正確。`},
+    {t:"選擇題",q:`In a passive sentence, the doer is introduced by:`,opts:["with","by","of","for"],a:1,ex:`動作執行者用 by。`},
+    {t:"填空題",q:`English ____ (speak) in many countries. (現在被動)`,opts:["is spoken","speaks","is speaking","spoke"],a:0,ex:`被動 is spoken。`},
+    {t:"是非題",q:`"The letter was wrote by him." 文法正確。`,opts:["正確 True","錯誤 False"],a:1,ex:`write 的 p.p. 是 written，故錯誤。`},
+    {t:"選擇題",q:`"The room ____ every day." (clean, 現在被動)`,opts:["is cleaned","cleans","cleaning","cleaned"],a:0,ex:`被動 is cleaned。`},
+    {t:"選擇題",q:`Passive of "The chef will cook it." is:`,opts:["It will cook.","It will be cooked.","It is cooked.","It cooks."],a:1,ex:`未來被動 will be cooked。`}
+  ]
+},
+/* 12 */ {
+  emoji:"🎴", rank:"不定詞 to V",
+  title:"想守護的人 Someone to Protect",
+  focus:"文法焦點：不定詞 To + V（目的、want/need + to V）",
+  story:[
+    {en:`Tanjiro fights <span class="kw" data-t="為了拯救（目的）">to save</span> his sister and every innocent person.`,zh:`炭治郎戰鬥是為了拯救妹妹和每一個無辜的人。`},
+    {en:`"I want <span class="kw" data-t="想要變強">to become</span> strong enough to defeat Muzan," he said.`,zh:`「我想變得足夠強大，去打敗無慘，」他說。`},
+    {en:`Zenitsu was too scared <span class="kw" data-t="(太害怕)而無法移動">to move</span>, but he still tried his best.`,zh:`善逸嚇得無法動彈，但他仍然盡力而為。`},
+    {en:`"We need <span class="kw" data-t="需要合作">to work</span> together <span class="kw" data-t="為了生存">to survive</span> this mission."`,zh:`「我們需要合作，才能在這次任務中生存。」`}
+  ],
+  gloss:[
+    {w:"save",pos:"v.",d:"拯救"},{w:"innocent",pos:"adj.",d:"無辜的"},
+    {w:"enough",pos:"adv./adj.",d:"足夠（地）"},{w:"scared",pos:"adj.",d:"害怕的"},
+    {w:"try one's best",pos:"phr.",d:"盡力"},{w:"work together",pos:"phr.",d:"合作"}
+  ],
+  grammar:[
+    {rule:`<em>不定詞 to + 原形動詞</em>，可表「目的（為了…）」：He fights <b>to save</b> her.`},
+    {rule:`常見動詞後接不定詞：<b>want, need, decide, hope, plan, would like, learn</b> + to V。例：I want <b>to become</b> strong.`},
+    {rule:`句型 <b>too + 形容詞 + to V</b>（太…而無法…）：too scared <b>to move</b>；<b>形容詞 + enough + to V</b>。`}
+  ],
+  bank:[
+    {t:"選擇題",q:`Tanjiro fights ____ his sister. (目的)`,opts:["to save","save","saving","saved"],a:0,ex:`表目的用 to + 原形 save。`},
+    {t:"選擇題",q:`"I want ____ strong." (become)`,opts:["become","to become","becoming","became"],a:1,ex:`want + to V。`},
+    {t:"填空題",q:`Zenitsu was too scared ____ (move).`,opts:["to move","move","moving","moved"],a:0,ex:`too + adj + to V。`},
+    {t:"選擇題",q:`"We need ____ together." (work)`,opts:["work","to work","working","worked"],a:1,ex:`need + to V。`},
+    {t:"選擇題",q:`Which verb is usually followed by "to V"?`,opts:["enjoy","decide","finish","practice"],a:1,ex:`decide + to V；enjoy/finish/practice 接 V-ing。`},
+    {t:"是非題",q:`"He hopes to win the game." 文法正確。`,opts:["正確 True","錯誤 False"],a:0,ex:`hope + to V，正確。`},
+    {t:"選擇題",q:`"She is strong enough ____ the rock." (cut)`,opts:["to cut","cut","cutting","cuts"],a:0,ex:`enough + to V。`},
+    {t:"填空題",q:`"They decided ____ (leave) early."`,opts:["to leave","leave","leaving","left"],a:0,ex:`decide + to V。`},
+    {t:"是非題",q:`"I want become a hero." 文法正確。`,opts:["正確 True","錯誤 False"],a:1,ex:`want 後須加 to，應為 to become，故錯誤。`},
+    {t:"選擇題",q:`"He went to the dojo ____ harder." (目的, train)`,opts:["to train","train","training","trained"],a:0,ex:`表目的 to train。`},
+    {t:"選擇題",q:`"I would like ____ some water, please." (have)`,opts:["have","to have","having","had"],a:1,ex:`would like + to V。`}
+  ]
+},
+/* 13 */ {
+  emoji:"👃", rule:"動名詞", rank:"動名詞 V-ing",
+  title:"善逸與伊之助 Zenitsu and Inosuke",
+  focus:"文法焦點：動名詞 V-ing（當主詞/受詞、enjoy + V-ing）",
+  story:[
+    {en:`<span class="kw" data-t="奔跑（當主詞）">Running</span> through the forest is Inosuke's favorite thing.`,zh:`在森林裡奔跑是伊之助最愛的事。`},
+    {en:`Zenitsu hates <span class="kw" data-t="戰鬥">fighting</span>, but he is amazing at <span class="kw" data-t="使用閃電">using</span> Thunder Breathing in his sleep.`,zh:`善逸討厭戰鬥，但他在睡夢中使用雷之呼吸卻很驚人。`},
+    {en:`Tanjiro is good at <span class="kw" data-t="嗅聞">smelling</span> the threads of an enemy's movement.`,zh:`炭治郎擅長嗅出敵人動作的「線」。`},
+    {en:`"I enjoy <span class="kw" data-t="(享受)幫助">helping</span> people," Tanjiro said. "It gives me strength."`,zh:`「我喜歡幫助人，」炭治郎說。「這給我力量。」`}
+  ],
+  gloss:[
+    {w:"favorite",pos:"adj.",d:"最喜愛的"},{w:"hate",pos:"v.",d:"討厭"},
+    {w:"amazing",pos:"adj.",d:"驚人的、了不起的"},{w:"thread",pos:"n.",d:"線、絲"},
+    {w:"movement",pos:"n.",d:"動作、移動"},{w:"strength",pos:"n.",d:"力量"}
+  ],
+  grammar:[
+    {rule:`<em>動名詞 V-ing</em> = 把動詞變名詞。可當<b>主詞</b>：<b>Running</b> is fun. 或<b>受詞</b>。`},
+    {rule:`常見動詞後接 V-ing：<b>enjoy, hate, like, love, finish, practice, mind, keep</b> + V-ing。`},
+    {rule:`<b>介系詞 (at, of, in, about...) 後面</b>一定接 V-ing：good <b>at swimming</b>, think <b>about leaving</b>。`}
+  ],
+  bank:[
+    {t:"選擇題",q:`____ through the forest is Inosuke's favorite. (run, 當主詞)`,opts:["Run","Running","To run","Runs"],a:1,ex:`當主詞用動名詞 Running。`},
+    {t:"選擇題",q:`Zenitsu hates ____. (fight)`,opts:["fight","fighting","to fight","fought"],a:1,ex:`hate + V-ing。`},
+    {t:"填空題",q:`He is good at ____ (use) Thunder Breathing.`,opts:["using","use","to use","used"],a:0,ex:`介系詞 at + V-ing。`},
+    {t:"選擇題",q:`"I enjoy ____ people." (help)`,opts:["help","to help","helping","helped"],a:2,ex:`enjoy + V-ing。`},
+    {t:"選擇題",q:`Which verb is followed by V-ing?`,opts:["want","decide","finish","hope"],a:2,ex:`finish + V-ing；其餘接 to V。`},
+    {t:"是非題",q:`"She is interested in learning English." 文法正確。`,opts:["正確 True","錯誤 False"],a:0,ex:`in + V-ing，正確。`},
+    {t:"選擇題",q:`"Thank you for ____ me." (help)`,opts:["help","helping","to help","helped"],a:1,ex:`for(介系詞) + V-ing。`},
+    {t:"填空題",q:`"Would you mind ____ (close) the window?"`,opts:["closing","close","to close","closed"],a:0,ex:`mind + V-ing。`},
+    {t:"是非題",q:`"I am good at to swim." 文法正確。`,opts:["正確 True","錯誤 False"],a:1,ex:`at 後應接 swimming，故錯誤。`},
+    {t:"選擇題",q:`"____ is good for your health." (swim)`,opts:["Swim","To swimming","Swimming","Swims"],a:2,ex:`當主詞用動名詞 Swimming。`},
+    {t:"選擇題",q:`"He keeps ____ even when he's tired." (train)`,opts:["train","training","to train","trained"],a:1,ex:`keep + V-ing。`}
+  ]
+},
+/* 14 */ {
+  emoji:"🔥", rank:"關係代名詞",
+  title:"炎柱・煉獄杏壽郎 The Flame Hashira",
+  focus:"文法焦點：關係代名詞 Who / Which / That",
+  story:[
+    {en:`Rengoku is the Flame Hashira <span class="kw" data-t="(who) 那位…的人">who</span> never lets his heart burn out.`,zh:`煉獄是那位心火永不熄滅的炎柱。`},
+    {en:`On the train <span class="kw" data-t="(which) 那班…的物">which</span> carried hundreds of people, a demon was hiding.`,zh:`在那班載著數百人的列車上，藏著一隻鬼。`},
+    {en:`He fought the demon <span class="kw" data-t="(that) 人物皆可">that</span> attacked the passengers all night long.`,zh:`他整夜對抗那隻攻擊乘客的鬼。`},
+    {en:`"Set your heart ablaze!" said the man <span class="kw" data-t="(whose) 他的…">whose</span> words Tanjiro would never forget.`,zh:`「燃燒你的心！」這位話語令炭治郎永生難忘的男人說道。`}
+  ],
+  gloss:[
+    {w:"Hashira",pos:"n.",d:"柱（鬼殺隊最強劍士）"},{w:"burn out",pos:"phr.",d:"燒盡、熄滅"},
+    {w:"carry",pos:"v.",d:"載運"},{w:"passenger",pos:"n.",d:"乘客"},
+    {w:"ablaze",pos:"adj.",d:"燃燒的"},{w:"forget",pos:"v.",d:"忘記"}
+  ],
+  grammar:[
+    {rule:`<em>關係代名詞</em>把兩句合併，用來修飾名詞（先行詞）。<b>who</b> 修飾「人」。`},
+    {rule:`<b>which</b> 修飾「物/動物」；<b>that</b> 人、物皆可。例：the demon <b>that/which</b> attacked them。`},
+    {rule:`<b>whose</b> 表「…的」（所有格）：the man <b>whose</b> words... = 那個人的話。`}
+  ],
+  bank:[
+    {t:"選擇題",q:`Rengoku is the Hashira ____ never gives up.`,opts:["which","who","whose","where"],a:1,ex:`修飾人 → who。`},
+    {t:"選擇題",q:`The train ____ carried people had a demon.`,opts:["who","which","whose","when"],a:1,ex:`修飾物 → which。`},
+    {t:"填空題",q:`He fought the demon ____ attacked the passengers. (人物皆可)`,opts:["who","that","whose","where"],a:1,ex:`that 人物皆可。`},
+    {t:"選擇題",q:`"the man ____ words he never forgot" (他的)`,opts:["who","which","whose","that"],a:2,ex:`表所有格「他的」用 whose。`},
+    {t:"選擇題",q:`A passenger is a person ____ travels on a train.`,opts:["which","who","whose","when"],a:1,ex:`修飾人 → who。`},
+    {t:"是非題",q:`"I have a cat which is black." 文法正確。`,opts:["正確 True","錯誤 False"],a:0,ex:`動物用 which，正確。`},
+    {t:"選擇題",q:`"The sword ____ he uses is special."`,opts:["who","which","whose","when"],a:1,ex:`修飾物 sword → which。`},
+    {t:"填空題",q:`"She is the girl ____ saved me." (人)`,opts:["who","which","whose","where"],a:0,ex:`修飾人 → who。`},
+    {t:"是非題",q:`"The boy which won is my friend." 文法正確。`,opts:["正確 True","錯誤 False"],a:1,ex:`修飾人應用 who，故錯誤。`},
+    {t:"選擇題",q:`"This is the house ____ roof is red." (它的)`,opts:["who","which","whose","that"],a:2,ex:`「它的屋頂」用 whose。`},
+    {t:"選擇題",q:`"The book ____ I read was scary."`,opts:["who","which","whose","when"],a:1,ex:`修飾物 book → which。`}
+  ]
+},
+/* 15 */ {
+  emoji:"🎶", rank:"對等連接詞",
+  title:"音柱・宇髓天元 The Sound Hashira",
+  focus:"文法焦點：對等連接詞 And / But / Or / So",
+  story:[
+    {en:`Tengen is loud <span class="kw" data-t="而且">and</span> flashy, but he is also a brilliant fighter.`,zh:`天元既吵鬧又華麗，但他也是個出色的戰士。`},
+    {en:`The team could fight together <span class="kw" data-t="或者">or</span> split up to search the entertainment district.`,zh:`隊伍可以一起戰鬥，或是分頭搜索花街。`},
+    {en:`The demon was very strong, <span class="kw" data-t="但是">but</span> the slayers refused to run.`,zh:`那隻鬼非常強大，但隊士們拒絕逃跑。`},
+    {en:`Daki was dangerous, <span class="kw" data-t="所以">so</span> Tanjiro and his friends worked as one team.`,zh:`墮姬很危險，所以炭治郎和朋友們團結成一隊。`}
+  ],
+  gloss:[
+    {w:"loud",pos:"adj.",d:"大聲的、吵鬧的"},{w:"flashy",pos:"adj.",d:"華麗的、炫的"},
+    {w:"brilliant",pos:"adj.",d:"傑出的"},{w:"split up",pos:"phr.",d:"分開、分頭"},
+    {w:"refuse",pos:"v.",d:"拒絕"},{w:"district",pos:"n.",d:"區、地帶"}
+  ],
+  grammar:[
+    {rule:`<em>對等連接詞</em>連接「對等」的字、片語或句子。<b>and</b>（並列、而且）、<b>but</b>（轉折、但是）。`},
+    {rule:`<b>or</b>（選擇、或者）、<b>so</b>（結果、所以）。例：He was tired, <b>so</b> he rested.`},
+    {rule:`口訣：並列 and、轉折 but、選擇 or、結果 so。連接兩個完整句子時，前面常加逗號。`}
+  ],
+  bank:[
+    {t:"選擇題",q:`Tengen is loud ____ flashy. (並列)`,opts:["and","but","or","so"],a:0,ex:`並列用 and。`},
+    {t:"選擇題",q:`The demon was strong, ____ they refused to run. (轉折)`,opts:["and","but","or","so"],a:1,ex:`轉折用 but。`},
+    {t:"填空題",q:`Fight together ____ split up? (選擇)`,opts:["or","and","but","so"],a:0,ex:`選擇用 or。`},
+    {t:"選擇題",q:`Daki was dangerous, ____ they worked as a team. (結果)`,opts:["and","but","or","so"],a:3,ex:`結果用 so。`},
+    {t:"選擇題",q:`"I was hungry, ____ I ate a rice ball."`,opts:["but","or","so","and"],a:2,ex:`因果結果用 so。`},
+    {t:"是非題",q:`"She is kind but strict." 文法正確。`,opts:["正確 True","錯誤 False"],a:0,ex:`but 連接對比形容詞，正確。`},
+    {t:"選擇題",q:`"Do you want tea ____ coffee?"`,opts:["and","but","or","so"],a:2,ex:`二選一用 or。`},
+    {t:"填空題",q:`"It rained, ____ we stayed home." (結果)`,opts:["so","but","or","and"],a:0,ex:`結果用 so。`},
+    {t:"是非題",q:`"He tried hard, so he failed." 句意合理。`,opts:["正確 True","錯誤 False"],a:1,ex:`努力卻失敗應為轉折 but，用 so 不合理。`},
+    {t:"選擇題",q:`"Tanjiro ____ Nezuko traveled together."`,opts:["and","but","or","so"],a:0,ex:`並列兩個名詞用 and。`},
+    {t:"選擇題",q:`"The food was cheap ____ delicious." (並列優點)`,opts:["but","or","so","and"],a:3,ex:`並列用 and。`}
+  ]
+},
+/* 16 */ {
+  emoji:"🌫️", rank:"從屬連接詞",
+  title:"無限城之前 Before the Infinity Castle",
+  focus:"文法焦點：從屬連接詞 Because / Although / When",
+  story:[
+    {en:`<span class="kw" data-t="因為">Because</span> Muzan grew stronger, the Demon Slayer Corps prepared for the final war.`,zh:`因為無慘越來越強，鬼殺隊為最終決戰做準備。`},
+    {en:`<span class="kw" data-t="雖然">Although</span> the slayers were tired, they kept training every single day.`,zh:`雖然隊士們很疲憊，他們仍每天不停訓練。`},
+    {en:`<span class="kw" data-t="當…的時候">When</span> the night came, the demons would rise again.`,zh:`當夜晚來臨，鬼便會再度出現。`},
+    {en:`Tanjiro stayed calm <span class="kw" data-t="即使">even though</span> he felt afraid deep in his heart.`,zh:`即使內心深處感到害怕，炭治郎仍保持冷靜。`}
+  ],
+  gloss:[
+    {w:"grow",pos:"v.",d:"成長、變得（過去 grew）"},{w:"prepare",pos:"v.",d:"準備"},
+    {w:"tired",pos:"adj.",d:"疲憊的"},{w:"rise",pos:"v.",d:"升起、出現（過去 rose）"},
+    {w:"calm",pos:"adj.",d:"冷靜的"},{w:"afraid",pos:"adj.",d:"害怕的"}
+  ],
+  grammar:[
+    {rule:`<em>從屬連接詞</em>引導「附屬子句」。<b>because</b>（因為，表原因）；<b>so</b> 是結果，方向相反，勿混用。`},
+    {rule:`<b>although / even though</b>（雖然、即使，表讓步）：<b>Although</b> he was tired, he kept going.（不可再加 but）`},
+    {rule:`<b>when</b>（當…的時候，表時間）。子句可放句首（後加逗號）或句中。`}
+  ],
+  bank:[
+    {t:"選擇題",q:`____ Muzan grew stronger, the Corps prepared for war. (原因)`,opts:["Because","Although","So","But"],a:0,ex:`原因用 Because。`},
+    {t:"選擇題",q:`____ they were tired, they kept training. (讓步)`,opts:["Because","Although","So","And"],a:1,ex:`「雖然」用 Although。`},
+    {t:"填空題",q:`____ the night came, demons rose. (時間)`,opts:["When","Because","Although","So"],a:0,ex:`「當…時」用 When。`},
+    {t:"選擇題",q:`"He stayed calm ____ he was afraid." (即使)`,opts:["because","even though","so","when"],a:1,ex:`「即使」用 even though。`},
+    {t:"選擇題",q:`"I was late ____ I missed the bus." (原因)`,opts:["because","although","so","but"],a:0,ex:`原因用 because。`},
+    {t:"是非題",q:`"Although it was raining, but we went out." 文法正確。`,opts:["正確 True","錯誤 False"],a:1,ex:`although 與 but 不可並用，故錯誤。`},
+    {t:"選擇題",q:`"____ I was young, I lived in Japan." (時間)`,opts:["When","Because","So","But"],a:0,ex:`時間用 When。`},
+    {t:"填空題",q:`"____ she studied hard, she passed." (因為)`,opts:["Because","Although","So","Or"],a:0,ex:`因為用 Because。`},
+    {t:"是非題",q:`"Although he is rich, he is not happy." 文法正確。`,opts:["正確 True","錯誤 False"],a:0,ex:`讓步 although，正確。`},
+    {t:"選擇題",q:`"Call me ____ you arrive." (當…時)`,opts:["when","because","although","so"],a:0,ex:`時間用 when。`},
+    {t:"選擇題",q:`"____ the test was hard, he got a good grade." (雖然)`,opts:["Although","Because","So","And"],a:0,ex:`雖然用 Although。`}
+  ]
+},
+/* 17 */ {
+  emoji:"⚔️", rank:"第一類條件句",
+  title:"柱們的合戰 The Hashira Unite",
+  focus:"文法焦點：第一類條件句 If（真實的未來）",
+  story:[
+    {en:`"<span class="kw" data-t="如果我們合作">If we work</span> together, we will defeat Muzan," said the Hashira.`,zh:`「如果我們齊心協力，就能打敗無慘，」柱們說。`},
+    {en:`"If the sun <span class="kw" data-t="升起">rises</span> before he dies, Muzan will burn to ashes."`,zh:`「如果在他死前太陽升起，無慘將化為灰燼。」`},
+    {en:`"You will lose your life <span class="kw" data-t="如果你犯錯">if you make</span> one mistake," Giyu warned.`,zh:`「如果你犯一個錯，就會送命，」義勇警告。`},
+    {en:`"If we <span class="kw" data-t="不放棄">don't give up</span>, the morning will come for everyone."`,zh:`「只要我們不放棄，黎明就會為所有人到來。」`}
+  ],
+  gloss:[
+    {w:"unite",pos:"v.",d:"團結、聯合"},{w:"defeat",pos:"v.",d:"打敗"},
+    {w:"ashes",pos:"n.",d:"灰燼"},{w:"mistake",pos:"n.",d:"錯誤"},
+    {w:"warn",pos:"v.",d:"警告"},{w:"morning",pos:"n.",d:"早晨、黎明"}
+  ],
+  grammar:[
+    {rule:`<em>第一類條件句</em>（可能成真的未來）：<b>If + 現在式, 主詞 + will + 原形</b>。`},
+    {rule:`重點：<b>if 子句用「現在式」，不可用 will</b>；主句才用 will。例：<b>If</b> we work hard, we <b>will</b> win.`},
+    {rule:`兩個子句可前後對調：We <b>will</b> win <b>if</b> we work hard.（順序對調時通常不加逗號）`}
+  ],
+  bank:[
+    {t:"選擇題",q:`"If we work together, we ____ Muzan."`,opts:["defeat","will defeat","defeated","defeating"],a:1,ex:`主句用 will defeat。`},
+    {t:"選擇題",q:`"If the sun ____ , he will die." (rise)`,opts:["will rise","rises","rose","rising"],a:1,ex:`if 子句用現在式 rises。`},
+    {t:"填空題",q:`"You ____ if you make a mistake." (lose, 主句)`,opts:["will lose","lose","lost","losing"],a:0,ex:`主句 will lose。`},
+    {t:"選擇題",q:`"If we ____ up, morning will come." (not give)`,opts:["won't give","don't give","didn't give","not give"],a:1,ex:`if 子句現在式否定 don't give。`},
+    {t:"選擇題",q:`In a first conditional, the IF-clause uses:`,opts:["will + V","現在式","過去式","would + V"],a:1,ex:`if 子句用現在式。`},
+    {t:"是非題",q:`"If it rains, we will stay home." 文法正確。`,opts:["正確 True","錯誤 False"],a:0,ex:`If + 現在式, will，正確。`},
+    {t:"選擇題",q:`"If you ____ hard, you will pass." (study)`,opts:["will study","study","studied","studying"],a:1,ex:`if 子句現在式 study。`},
+    {t:"填空題",q:`"I ____ (call) you if I find him."`,opts:["will call","call","called","calling"],a:0,ex:`主句 will call。`},
+    {t:"是非題",q:`"If he will come, I will be happy." 文法正確。`,opts:["正確 True","錯誤 False"],a:1,ex:`if 子句不可用 will，故錯誤。`},
+    {t:"選擇題",q:`"We will be late if we ____ now." (not leave)`,opts:["won't leave","don't leave","didn't leave","not leave"],a:1,ex:`if 子句現在式 don't leave。`},
+    {t:"選擇題",q:`"If the demon ____ , the people will be safe." (die)`,opts:["will die","dies","died","dying"],a:1,ex:`if 子句現在式 dies。`}
+  ]
+},
+/* 18 */ {
+  emoji:"🌀", rank:"第二類條件句",
+  title:"如果我更強 If I Were Stronger",
+  focus:"文法焦點：第二類條件句（假設語氣，與現在事實相反）",
+  story:[
+    {en:`"If I <span class="kw" data-t="(假設)更強">were</span> stronger, I would protect everyone," Tanjiro whispered.`,zh:`「如果我更強，我就能保護所有人，」炭治郎低語。`},
+    {en:`"If we <span class="kw" data-t="(假設)有更多時間)">had</span> more time, we would save more lives."`,zh:`「如果我們有更多時間，就能拯救更多生命。」`},
+    {en:`"If Rengoku <span class="kw" data-t="(假設)還活著">were</span> here, he would tell us to set our hearts ablaze."`,zh:`「如果煉獄還在，他會叫我們燃燒自己的心。」`},
+    {en:`"If I <span class="kw" data-t="(假設)不害怕">weren't</span> afraid, I would smile like him."`,zh:`「如果我不害怕，我就能像他一樣微笑。」`}
+  ],
+  gloss:[
+    {w:"whisper",pos:"v.",d:"低語"},{w:"protect",pos:"v.",d:"保護"},
+    {w:"life",pos:"n.",d:"生命（複數 lives）"},{w:"ablaze",pos:"adj.",d:"燃燒的"},
+    {w:"afraid",pos:"adj.",d:"害怕的"},{w:"smile",pos:"v.",d:"微笑"}
+  ],
+  grammar:[
+    {rule:`<em>第二類條件句</em>（與現在事實相反的假設）：<b>If + 過去式, 主詞 + would + 原形</b>。`},
+    {rule:`be 動詞在假設語氣中，所有主詞都常用 <b>were</b>：If I <b>were</b> you...（這是慣用法）。`},
+    {rule:`和第一類比較：可能成真→If + 現在式, will；與現實相反→If + 過去式, would。`}
+  ],
+  bank:[
+    {t:"選擇題",q:`"If I ____ stronger, I would protect everyone."`,opts:["am","were","will be","be"],a:1,ex:`假設語氣 be 用 were。`},
+    {t:"選擇題",q:`"If I were stronger, I ____ protect everyone."`,opts:["will","would","can","am"],a:1,ex:`主句用 would + 原形。`},
+    {t:"填空題",q:`"If we ____ (have) more time, we would save more lives."`,opts:["had","have","will have","having"],a:0,ex:`第二類條件 if 用過去式 had。`},
+    {t:"選擇題",q:`"If Rengoku ____ here, he would smile." (假設,他不在)`,opts:["is","were","will be","was being"],a:1,ex:`假設語氣用 were。`},
+    {t:"選擇題",q:`The second conditional pattern is:`,opts:["If + 現在式, will","If + 過去式, would","If + will, 現在式","If + would, 過去式"],a:1,ex:`If + 過去式, would。`},
+    {t:"是非題",q:`"If I were a bird, I would fly." 文法正確。`,opts:["正確 True","錯誤 False"],a:0,ex:`假設語氣 were + would，正確。`},
+    {t:"選擇題",q:`"If I ____ you, I would say sorry."`,opts:["am","was being","were","will be"],a:2,ex:`If I were you 慣用。`},
+    {t:"填空題",q:`"If he studied, he ____ (pass) the test." (假設)`,opts:["would pass","will pass","passes","passed"],a:0,ex:`主句 would pass。`},
+    {t:"是非題",q:`"If I will be rich, I would help them." 文法正確。`,opts:["正確 True","錯誤 False"],a:1,ex:`if 子句不可用 will，且應為過去式，故錯誤。`},
+    {t:"選擇題",q:`"If we ____ wings, we would fly away." (假設沒有, have)`,opts:["have","had","will have","having"],a:1,ex:`第二類條件用過去式 had。`},
+    {t:"選擇題",q:`"If I weren't afraid, I ____ smile."`,opts:["will","would","can","am"],a:1,ex:`主句 would。`}
+  ]
+},
+/* 19 */ {
+  emoji:"🏯", rank:"間接問句",
+  title:"無慘在哪裡？ Where Is Muzan?",
+  focus:"文法焦點：間接問句 Indirect Questions（句中問句語序)",
+  story:[
+    {en:`The slayers needed to know <span class="kw" data-t="無慘在哪裡（間接）">where Muzan was</span> hiding.`,zh:`隊士們需要知道無慘藏在哪裡。`},
+    {en:`"Do you know <span class="kw" data-t="他何時會出現（間接）">when he will appear</span>?" Tanjiro asked Tamayo.`,zh:`「你知道他何時會出現嗎？」炭治郎問珠世。`},
+    {en:`Nobody understood <span class="kw" data-t="他為何如此憎恨人類（間接）">why he hated</span> humans so much.`,zh:`沒有人明白他為何如此憎恨人類。`},
+    {en:`"Can you tell me <span class="kw" data-t="如何擊敗他（間接）">how we can defeat</span> him?" he asked desperately.`,zh:`「你能告訴我我們要如何打敗他嗎？」他絕望地問。`}
+  ],
+  gloss:[
+    {w:"hide",pos:"v.",d:"躲藏（過去 hid）"},{w:"appear",pos:"v.",d:"出現"},
+    {w:"understand",pos:"v.",d:"明白（過去 understood）"},{w:"hate",pos:"v.",d:"憎恨"},
+    {w:"defeat",pos:"v.",d:"打敗"},{w:"desperately",pos:"adv.",d:"絕望地、拼命地"}
+  ],
+  grammar:[
+    {rule:`<em>間接問句</em>：把問句放進另一句中（如 know/wonder/tell me + 疑問詞...）。`},
+    {rule:`關鍵：間接問句要用<b>「肯定句語序」（主詞 + 動詞）</b>，<b>不用</b>助動詞倒裝。`},
+    {rule:`直接 Where <b>is</b> he? → 間接 I know where he <b>is</b>. 直接 What <b>does</b> he want? → 間接 I know what he <b>wants</b>.`}
+  ],
+  bank:[
+    {t:"選擇題",q:`They needed to know where Muzan ____.`,opts:["was hiding","was he hiding","is he hiding","did he hide"],a:0,ex:`間接問句用肯定語序 where Muzan was hiding。`},
+    {t:"選擇題",q:`"Do you know when he ____?"`,opts:["will appear","will he appear","does appear","appear will"],a:0,ex:`肯定語序 when he will appear。`},
+    {t:"填空題",q:`Nobody understood why he ____ humans. (hate, 過去)`,opts:["hated","did hate","hates","did he hate"],a:0,ex:`間接問句直接用動詞 hated。`},
+    {t:"選擇題",q:`"Can you tell me how we ____ defeat him?"`,opts:["can","can we","do","could we"],a:0,ex:`肯定語序 how we can defeat。`},
+    {t:"選擇題",q:`Indirect: "I don't know where ____."`,opts:["he lives","does he live","lives he","he does live"],a:0,ex:`肯定語序 where he lives。`},
+    {t:"是非題",q:`"I wonder what time it is." 文法正確。`,opts:["正確 True","錯誤 False"],a:0,ex:`間接問句肯定語序 it is，正確。`},
+    {t:"選擇題",q:`"Could you tell me where the station ____?"`,opts:["is","is it","does it","it is"],a:0,ex:`肯定語序 where the station is。`},
+    {t:"填空題",q:`"I don't know what he ____." (want, 現在)`,opts:["wants","does want","want","does he want"],a:0,ex:`間接問句 what he wants。`},
+    {t:"是非題",q:`"Do you know where does he live?" 文法正確。`,opts:["正確 True","錯誤 False"],a:1,ex:`間接問句不可用 does 倒裝，應為 where he lives，故錯誤。`},
+    {t:"選擇題",q:`"Please tell me why she ____." (cry, 過去)`,opts:["cried","did cry","cries","did she cry"],a:0,ex:`間接問句 why she cried。`},
+    {t:"選擇題",q:`"I'm not sure who ____ the door."`,opts:["opened","did open","does open","open"],a:0,ex:`間接問句肯定語序 who opened。`}
+  ]
+},
+/* 20 */ {
+  emoji:"🌅", rank:"附加問句",
+  title:"黎明終至 The Dawn Arrives",
+  focus:"文法焦點：附加問句 Tag Questions（…, 對吧？)",
+  story:[
+    {en:`After the final battle, the sun rose at last. "We won, <span class="kw" data-t="不是嗎？">didn't we</span>?" Tanjiro whispered.`,zh:`最終決戰後，太陽終於升起。「我們贏了，不是嗎？」炭治郎輕聲說。`},
+    {en:`"Nezuko is human again, <span class="kw" data-t="不是嗎？">isn't she</span>?" he asked, tears in his eyes.`,zh:`「禰豆子又變回人類了，不是嗎？」他眼含淚水地問。`},
+    {en:`"You won't forget our friends, <span class="kw" data-t="會嗎？">will you</span>?" Zenitsu said softly.`,zh:`「你不會忘記我們的夥伴，會嗎？」善逸輕聲說。`},
+    {en:`"We can finally live in peace, <span class="kw" data-t="不是嗎？">can't we</span>?" Everyone smiled at the warm morning sun.`,zh:`「我們終於能在和平中生活了，不是嗎？」大家對著溫暖的朝陽微笑。`}
+  ],
+  gloss:[
+    {w:"at last",pos:"phr.",d:"終於"},{w:"win",pos:"v.",d:"贏（過去 won）"},
+    {w:"tear",pos:"n.",d:"眼淚"},{w:"forget",pos:"v.",d:"忘記"},
+    {w:"softly",pos:"adv.",d:"輕柔地"},{w:"peace",pos:"n.",d:"和平、平靜"}
+  ],
+  grammar:[
+    {rule:`<em>附加問句</em>：在句尾加簡短問句確認。規則：<b>前肯定→後否定；前否定→後肯定</b>。`},
+    {rule:`時態與助動詞要一致：is→isn't, can→can't, will→won't, did(過去一般動詞)→didn't。主詞改成<b>代名詞</b>。`},
+    {rule:`例：You are tired, <b>aren't you</b>? / She didn't come, <b>did she</b>? / We won, <b>didn't we</b>?`}
+  ],
+  bank:[
+    {t:"選擇題",q:`"We won, ____?"`,opts:["didn't we","did we","weren't we","won't we"],a:0,ex:`前肯定(won/過去)→ didn't we。`},
+    {t:"選擇題",q:`"Nezuko is human again, ____?"`,opts:["is she","isn't she","does she","won't she"],a:1,ex:`前肯定 is → isn't she。`},
+    {t:"填空題",q:`"You won't forget them, ____?"`,opts:["will you","won't you","do you","did you"],a:0,ex:`前否定 won't → will you。`},
+    {t:"選擇題",q:`"We can live in peace, ____?"`,opts:["can we","can't we","do we","will we"],a:1,ex:`前肯定 can → can't we。`},
+    {t:"選擇題",q:`"She is a slayer, ____?"`,opts:["is she","isn't she","does she","won't she"],a:1,ex:`is → isn't she。`},
+    {t:"是非題",q:`"He likes ramen, doesn't he?" 文法正確。`,opts:["正確 True","錯誤 False"],a:0,ex:`一般動詞現在式 likes → doesn't he，正確。`},
+    {t:"選擇題",q:`"They didn't run, ____?"`,opts:["did they","didn't they","do they","were they"],a:0,ex:`前否定 didn't → did they。`},
+    {t:"填空題",q:`"You are Tanjiro, ____?"`,opts:["aren't you","are you","don't you","isn't it"],a:0,ex:`are → aren't you。`},
+    {t:"是非題",q:`"She can swim, can she?" 文法正確。`,opts:["正確 True","錯誤 False"],a:1,ex:`前肯定應接否定 can't she，故錯誤。`},
+    {t:"選擇題",q:`"He doesn't like demons, ____?"`,opts:["does he","doesn't he","is he","did he"],a:0,ex:`前否定 doesn't → does he。`},
+    {t:"選擇題",q:`"Let's set our hearts ablaze, ____?" (Let's 慣用)`,opts:["will we","shall we","don't we","aren't we"],a:1,ex:`Let's ... 的附加問句用 shall we。`}
+  ]
+}
+];
+
+/* ===================== 引擎（與通用版相同） ===================== */
+const SAVE_KEY = "demonslayer_eng_v1";
+const MIN_Q = 5, MAX_Q = 7, START_HEARTS = 3;
+
+let state = load();
+function load(){
+  try{ const s = JSON.parse(localStorage.getItem(SAVE_KEY));
+    if(s && typeof s.cleared==="number") return s; }catch(e){}
+  return {cleared:0, xp:0};
+}
+function save(){ localStorage.setItem(SAVE_KEY, JSON.stringify(state)); }
+let session = null;
+
+function $(id){return document.getElementById(id)}
+
+/* ---------- 音效（Web Audio，免外部檔、可離線） ---------- */
+const SOUND_KEY="ds_sound";
+let soundOn = localStorage.getItem(SOUND_KEY)!=="off";
+let actx=null;
+function actxInit(){ if(!actx){ try{actx=new (window.AudioContext||window.webkitAudioContext)();}catch(e){} } if(actx&&actx.state==="suspended") actx.resume(); }
+function beep(freq,dur,type="sine",vol=0.18,when=0){
+  if(!soundOn||!actx) return;
+  const t=actx.currentTime+when;
+  const o=actx.createOscillator(), g=actx.createGain();
+  o.type=type; o.frequency.value=freq; o.connect(g); g.connect(actx.destination);
+  g.gain.setValueAtTime(0.0001,t);
+  g.gain.linearRampToValueAtTime(vol,t+0.012);
+  g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
+  o.start(t); o.stop(t+dur+0.02);
+}
+const SFX={
+  click:()=>beep(420,0.07,"triangle",0.10),
+  correct:()=>{beep(659,0.12,"sine",0.2);beep(880,0.18,"sine",0.2,0.10);},
+  wrong:()=>{beep(196,0.28,"sawtooth",0.16);beep(146,0.3,"sawtooth",0.14,0.04);},
+  clear:()=>{[523,659,784,1047].forEach((f,i)=>beep(f,0.28,"sine",0.2,i*0.12));},
+  fail:()=>{[392,330,262,196].forEach((f,i)=>beep(f,0.34,"sawtooth",0.15,i*0.15));}
+};
+// 首次互動啟用音訊
+window.addEventListener("pointerdown",actxInit,{once:true});
+$("soundBtn").onclick=()=>{ soundOn=!soundOn; localStorage.setItem(SOUND_KEY,soundOn?"on":"off"); $("soundBtn").textContent=soundOn?"🔊":"🔇"; if(soundOn){actxInit();SFX.click();} };
+$("soundBtn").textContent=soundOn?"🔊":"🔇";
+
+/* ---------- AI 出題（使用者自帶 Anthropic 金鑰） ---------- */
+const KEY_STORE="ds_anthropic_key", MODEL_STORE="ds_model", AIMODE_KEY="ds_aimode";
+function getKey(){return localStorage.getItem(KEY_STORE)||"";}
+function getModel(){return localStorage.getItem(MODEL_STORE)||"claude-haiku-4-5";}
+let aiMode = localStorage.getItem(AIMODE_KEY)==="on";
+
+$("settingsBtn").onclick=()=>{ $("keyInput").value=getKey(); $("modelSelect").value=getModel(); $("settingsModal").classList.add("show"); };
+$("settingsCloseBtn").onclick=()=>$("settingsModal").classList.remove("show");
+$("settingsModal").onclick=(e)=>{ if(e.target===$("settingsModal")) $("settingsModal").classList.remove("show"); };
+$("settingsSaveBtn").onclick=()=>{
+  localStorage.setItem(KEY_STORE,$("keyInput").value.trim());
+  localStorage.setItem(MODEL_STORE,$("modelSelect").value);
+  $("settingsModal").classList.remove("show"); toast("設定已儲存"); updateAiWarn();
+};
+$("keyClearBtn").onclick=()=>{ localStorage.removeItem(KEY_STORE); $("keyInput").value=""; toast("金鑰已清除"); updateAiWarn(); };
+$("aiToggle").onchange=(e)=>{ aiMode=e.target.checked; localStorage.setItem(AIMODE_KEY,aiMode?"on":"off"); updateAiWarn(); };
+function updateAiWarn(){
+  const w=$("aiKeyWarn");
+  if(aiMode && !getKey()) w.textContent="⚠️ 尚未設定 API 金鑰，本關仍會使用內建題庫。請點右上角 ⚙️ 填入金鑰。";
+  else if(aiMode) w.textContent="✅ AI 出題已啟用，將即時生成全新題目。";
+  else w.textContent="";
+}
+
+async function generateAIQuestions(lv){
+  const key=getKey(); if(!key) throw new Error("nokey");
+  const sys="You are an English grammar quiz generator for Taiwanese junior-high students (grade 8-9, CEFR A2-B1). Output ONLY valid JSON. No markdown, no commentary.";
+  const prompt=`Create exactly 7 English grammar multiple-choice questions.
+- Story flavor: Demon Slayer / 鬼滅之刃 (sword fighters, demons, breathing techniques). Keep sentences simple.
+- Grammar focus — test ONLY this point: ${lv.rank} (${lv.focus}).
+- Difficulty: Taiwan junior high grade 8-9.
+- Each item is an object with keys:
+  "t": one of "選擇題","填空題","是非題"
+  "q": the question (English; 填空題/選擇題 use "____" for the blank; 是非題 may mix Chinese instruction + English sentence to judge)
+  "opts": array of options. 是非題 must be exactly ["正確 True","錯誤 False"]; others 3-4 options.
+  "a": 0-based index of the correct option
+  "ex": a short explanation in Traditional Chinese
+Return ONLY a JSON array of 7 objects, nothing else.`;
+  const res=await fetch("https://api.anthropic.com/v1/messages",{
+    method:"POST",
+    headers:{"content-type":"application/json","x-api-key":key,"anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-access":"true"},
+    body:JSON.stringify({model:getModel(),max_tokens:2500,system:sys,messages:[{role:"user",content:prompt}]})
+  });
+  if(!res.ok){ throw new Error("api "+res.status); }
+  const data=await res.json();
+  let text=(data.content||[]).map(c=>c.text||"").join("").trim();
+  text=text.replace(/^```(?:json)?\s*/i,"").replace(/```$/,"").trim();
+  const s=text.indexOf("["), e=text.lastIndexOf("]");
+  if(s>=0&&e>s) text=text.slice(s,e+1);
+  const arr=JSON.parse(text);
+  const clean=arr.filter(q=>q&&Array.isArray(q.opts)&&q.opts.length>=2&&typeof q.a==="number"&&q.a<q.opts.length).map(q=>({
+    t:q.t||"選擇題", q:String(q.q||""), opts:q.opts.map(String), a:q.a|0, ex:String(q.ex||"")
+  }));
+  if(clean.length<5) throw new Error("toofew");
+  return clean;
+}
+function shuffle(arr){const a=arr.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function pickQuestions(bank){
+  const n = MIN_Q + Math.floor(Math.random()*(MAX_Q-MIN_Q+1));
+  const chosen = shuffle(bank).slice(0, Math.min(n, bank.length));
+  return chosen.map(q=>{
+    const pairs = q.opts.map((text,i)=>({text,correct:i===q.a}));
+    const sp = shuffle(pairs);
+    return {t:q.t,q:q.q,ex:q.ex,opts:sp.map(p=>p.text),a:sp.findIndex(p=>p.correct)};
+  });
+}
+function toast(msg){const t=$("toast");t.textContent=msg;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),1800);}
+
+const VIEWS=["mapView","readView","quizView","resultView"];
+function show(view){VIEWS.forEach(v=>$(v).classList.toggle("hidden",v!==view));window.scrollTo({top:0,behavior:"smooth"});}
+function renderTop(){
+  $("xp").textContent=state.xp;
+  $("pbarFill").style.width=Math.round(state.cleared/LEVELS.length*100)+"%";
+}
+function coverPath(i){ return "covers/cover"+String(i+1).padStart(2,"0")+".png"; }
+
+function renderMap(){
+  renderTop();
+  const grid=$("mapGrid");grid.innerHTML="";
+  LEVELS.forEach((lv,i)=>{
+    const cleared=i<state.cleared, unlocked=i<=state.cleared;
+    const node=document.createElement("div");
+    node.className="node"+(cleared?" cleared":"")+(!unlocked?" locked":"");
+    const cov=coverPath(i);
+    node.innerHTML=`
+      ${cleared?'<div class="ribbon">CLEAR</div>':''}
+      ${!unlocked?'<div class="lock-ico">🔒</div>':''}
+      <div class="n-thumb"><img loading="lazy" src="${cov}" alt="" onerror="this.style.display='none'"><span class="n-emoji">${lv.emoji}</span></div>
+      <div class="n-num">第 ${i+1} 關 · ${lv.rank}</div>
+      <div class="n-name">${lv.title}</div>
+      <div class="n-state" style="color:${cleared?'var(--green)':unlocked?'var(--gold)':'var(--muted)'}">
+        ${cleared?'✓ 已通關':unlocked?'▶ 可挑戰':'🔒 未解鎖'}</div>`;
+    if(unlocked) node.onclick=()=>openLevel(i);
+    grid.appendChild(node);
+  });
+  show("mapView");
+}
+
+function openLevel(i){
+  SFX.click();
+  const lv=LEVELS[i];
+  const rc=$("readCover"); rc.style.display=""; rc.src=coverPath(i);
+  $("aiToggle").checked=aiMode; updateAiWarn();
+  $("readBadge").textContent=`${lv.emoji} 第 ${i+1} 關 / 共 ${LEVELS.length} 關`;
+  $("readTitle").innerHTML=`${lv.title} <span class="rank-tag">${lv.rank}</span>`;
+  $("readFocus").textContent=lv.focus;
+  $("storyBox").innerHTML=lv.story.map(p=>`<p>${p.en}<span class="trans">${p.zh}</span></p>`).join("");
+  $("glossBox").innerHTML=lv.gloss.map(g=>`<div class="gloss-item"><span class="pos">${g.pos}</span><b>${g.w}</b><span>${g.d}</span></div>`).join("");
+  $("grammarBox").innerHTML=lv.grammar.map(r=>`<div class="rule">${r.rule}</div>`).join("");
+  $("startQuizBtn").onclick=()=>startQuiz(i);
+  show("readView");
+  document.querySelectorAll("#storyBox .kw").forEach(el=>el.title=el.dataset.t);
+}
+function goMap(){renderMap();}
+
+async function startQuiz(i){
+  SFX.click();
+  const lv=LEVELS[i];
+  let qs;
+  if(aiMode && getKey()){
+    $("loadingBox").classList.add("show");
+    try{
+      const gen=await generateAIQuestions(lv);
+      qs=pickQuestions(gen);   // 從 AI 生成題中再抽 5~7 題並打亂選項
+    }catch(err){
+      toast("AI 出題失敗，改用內建題庫");
+      qs=pickQuestions(lv.bank);
+    }finally{ $("loadingBox").classList.remove("show"); }
+  }else{
+    qs=pickQuestions(lv.bank);
+  }
+  session={level:i,qs,idx:0,correct:0,hearts:START_HEARTS,answered:false,results:[]};
+  renderQuestion();show("quizView");
+}
+function renderHearts(){$("hearts").textContent="❤️".repeat(session.hearts)+"🖤".repeat(START_HEARTS-session.hearts);}
+function renderDots(){
+  const box=$("dots");box.innerHTML="";
+  session.qs.forEach((_,k)=>{const d=document.createElement("i");
+    if(k<session.results.length)d.className=session.results[k]?"pass":"fail";
+    else if(k===session.idx)d.className="cur";box.appendChild(d);});
+}
+function renderQuestion(){
+  renderHearts();renderDots();
+  const q=session.qs[session.idx];session.answered=false;
+  $("qCounter").textContent=`第 ${session.idx+1} / ${session.qs.length} 題`;
+  $("qType").textContent=q.t;
+  $("qText").innerHTML=q.q.replace(/____/g,'<span class="blank">？</span>');
+  const keys=["A","B","C","D","E"];const box=$("optBox");box.innerHTML="";
+  q.opts.forEach((opt,k)=>{const b=document.createElement("button");b.className="opt";
+    b.innerHTML=`<span class="key">${keys[k]}</span><span>${opt}</span>`;b.onclick=()=>answer(k,b);box.appendChild(b);});
+  $("feedback").className="feedback";$("feedback").innerHTML="";$("nextBtn").classList.add("hidden");
+}
+function answer(k){
+  if(session.answered)return;session.answered=true;
+  const q=session.qs[session.idx];const correct=k===q.a;
+  document.querySelectorAll("#optBox .opt").forEach((o,i)=>{o.classList.add("disabled");
+    if(i===q.a)o.classList.add("correct");if(i===k&&!correct)o.classList.add("wrong");});
+  const fb=$("feedback");
+  if(correct){SFX.correct();session.correct++;session.results.push(true);fb.className="feedback ok show";fb.innerHTML=`✅ <b>答對了！</b> ${q.ex}`;}
+  else{SFX.wrong();session.hearts--;session.results.push(false);fb.className="feedback no show";fb.innerHTML=`❌ <b>答錯了。</b>正解：<b>${q.opts[q.a]}</b>。${q.ex}`;renderHearts();}
+  renderDots();
+  if(session.hearts<=0){setTimeout(()=>finishQuiz(false),900);return;}
+  const last=session.idx===session.qs.length-1;const nb=$("nextBtn");
+  nb.classList.remove("hidden");nb.textContent=last?"看結果 →":"下一題 →";
+  nb.onclick=()=>{if(last){finishQuiz(session.correct===session.qs.length);}else{session.idx++;renderQuestion();}};
+}
+function finishQuiz(passed){
+  const total=session.qs.length;
+  const gained=passed?(10*total+session.hearts*5):(2*session.correct);
+  state.xp+=gained;
+  if(passed&&session.level===state.cleared)state.cleared++;
+  save();renderTop();
+  passed?SFX.clear():SFX.fail();
+  $("resBig").textContent=passed?"🏆":"💀";
+  $("resScore").textContent=`${session.correct}/${total}`;
+  $("resXp").textContent=`+${gained}`;
+  $("resHearts").textContent="❤️".repeat(Math.max(session.hearts,0))||"—";
+  const isLast=session.level===LEVELS.length-1;
+  if(passed){
+    $("resTitle").textContent=isLast?"全 20 關通關！黎明降臨 🌅":"通關成功！Stage Clear!";
+    $("resMsg").textContent=isLast?"你陪炭治郎走完了全部修行，英文文法功力大成！可重玩任一關鞏固。":"全部答對，下一關已解鎖。乘勝追擊！";
+    $("resNext").classList.remove("hidden");
+    $("resNext").textContent=isLast?"回到地圖 🗺️":"前往下一關 →";
+    $("resNext").onclick=isLast?renderMap:()=>openLevel(session.level+1);
+    $("resRetry").textContent="重玩本關";$("resRetry").onclick=()=>startQuiz(session.level);
+  }else{
+    $("resTitle").textContent="闖關失敗… 再試一次！";
+    $("resMsg").textContent="必須「全部答對」才能通關（生命歸零也會失敗）。題目會重新隨機抽取，別氣餒！";
+    $("resNext").classList.remove("hidden");
+    $("resNext").textContent="🔄 再挑戰一次";$("resNext").onclick=()=>startQuiz(session.level);
+    $("resRetry").textContent="← 返回地圖";$("resRetry").onclick=renderMap;
+  }
+  show("resultView");
+}
+function confirmQuit(){if(confirm("確定要放棄這次挑戰並返回地圖嗎？進度不會保存。"))renderMap();}
+$("resetBtn").onclick=()=>{if(confirm("確定要清除所有通關進度與 XP 嗎？此動作無法復原。")){state={cleared:0,xp:0};save();toast("進度已重置");renderMap();}};
+
+renderMap();
+</script>
+</body>
+</html>
