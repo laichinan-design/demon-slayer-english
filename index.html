@@ -449,25 +449,44 @@ function updateAiWarn(){
 
 async function generateAIQuestions(lv){
   const key=getKey(); if(!key) throw new Error("nokey");
-  const sys="You are an English grammar quiz generator for Taiwanese junior-high students (grade 8-9, CEFR A2-B1). Output ONLY valid JSON. No markdown, no commentary.";
+  const sys="You are a creative English quiz generator for Taiwanese junior-high students (grade 8-9, CEFR A2-B1). You produce VARIED, non-repetitive questions. Output ONLY valid JSON. No markdown, no commentary.";
   const vocabList=(lv.vocab||[]).map(v=>v.w).join(", ");
-  const prompt=`Create exactly 10 English multiple-choice questions for one level.
-- Story flavor: Demon Slayer / 鬼滅之刃 (sword fighters, demons, breathing techniques). Keep sentences simple.
-- Mix of TWO kinds:
-  * 5 GRAMMAR questions testing ONLY this point: ${lv.rank} (${lv.focus}).
-  * 5 VOCABULARY questions testing the meaning/usage of these words: ${vocabList}.
-- Difficulty: Taiwan junior high grade 8-9.
-- Each item is an object with keys:
-  "t": one of "選擇題","填空題","是非題"
-  "q": the question (English; 填空題/選擇題 use "____" for the blank; 是非題 may mix Chinese instruction + English sentence to judge)
+  // 隨機種子 + 隨機場景，強迫每次生成都不一樣
+  const scenes=["在最終選別的藤襲山","在無限列車上","在花街(遊郭)","在蝴蝶屋療傷","在刀匠之里","在與上弦之鬼的戰鬥中","在鬼殺隊的訓練","在前往下一個任務的路上","在無限城內","在黎明來臨之際"];
+  const scene=scenes[Math.floor(Math.random()*scenes.length)];
+  const seed=Math.floor(Math.random()*1e9);
+  const prompt=`Create exactly 14 English questions for ONE level of a Demon Slayer (鬼滅之刃) learning game.
+Random seed: ${seed}. Use this seed so the set is DIFFERENT from any previous set — vary sentences, names, scenes and which options are correct.
+Suggested scene flavor for this batch: ${scene}（但可自由變化）.
+
+COMPOSITION (exactly 14):
+- 7 GRAMMAR questions testing ONLY this point: ${lv.rank} (${lv.focus}).
+- 7 VOCABULARY questions on these words (meaning, synonym/antonym, or correct usage): ${vocabList}.
+
+USE A VARIETY OF QUESTION FORMATS (mix them, do not make them all the same):
+- "選擇題" 一般四選一
+- "填空題" 句中挖空 (用 "____")
+- "是非題" 判斷對錯
+- "改錯題" 找出句中文法錯誤的選項 / 判斷句子是否正確
+- "重組題" 選出正確語序的句子
+- "語意題" 選出與單字意思最接近(同義)或相反(反義)的字
+- "情境題" 給一句對話情境，選最適合的回答或填空
+- "翻譯題" 選出中文句子對應的正確英文 (或英翻中)
+RULES:
+- Difficulty: Taiwan junior high grade 8-9; keep sentences short.
+- DO NOT repeat the same word, sentence pattern, or answer wording twice. Each of the 14 must feel distinct.
+- Vary the position of the correct option (do not always put it first).
+Each item is an object:
+  "t": one of "選擇題","填空題","是非題","改錯題","重組題","語意題","情境題","翻譯題"
+  "q": the question text (Chinese instructions allowed; 填空題/選擇題 use "____" for blanks)
   "opts": array of options. 是非題 must be exactly ["正確 True","錯誤 False"]; others 3-4 options.
   "a": 0-based index of the correct option
   "ex": a short explanation in Traditional Chinese
-Return ONLY a JSON array of 10 objects, nothing else.`;
+Return ONLY a JSON array of 14 objects, nothing else.`;
   const res=await fetch("https://api.anthropic.com/v1/messages",{
     method:"POST",
     headers:{"content-type":"application/json","x-api-key":key,"anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-access":"true"},
-    body:JSON.stringify({model:getModel(),max_tokens:2500,system:sys,messages:[{role:"user",content:prompt}]})
+    body:JSON.stringify({model:getModel(),max_tokens:3800,temperature:1,system:sys,messages:[{role:"user",content:prompt}]})
   });
   if(!res.ok){ throw new Error("api "+res.status); }
   const data=await res.json();
