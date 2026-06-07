@@ -347,16 +347,25 @@
 <div class="modal-bg" id="settingsModal">
   <div class="modal">
     <h3>⚙️ AI 即時出題設定</h3>
-    <p>填入你<b>自己的 Anthropic API 金鑰</b>，即可讓 Claude 依每關文法主題即時生成全新題目。<br>
-       🔒 金鑰<b>只會存在你這台瀏覽器</b>（localStorage），不會上傳、不會被推上 GitHub。</p>
-    <label for="keyInput">Anthropic API Key</label>
-    <input type="password" id="keyInput" placeholder="sk-ant-..." autocomplete="off">
-    <div class="hint">取得金鑰：console.anthropic.com → API Keys</div>
+    <p>填入你<b>自己的 API 金鑰</b>（支援 <b>OpenAI</b> 或 <b>Anthropic</b>），即可依每關主題即時生成全新題目。<br>
+       🔒 金鑰<b>只會存在你這台瀏覽器</b>（localStorage），不會上傳、不會被推上 GitHub。<br>
+       系統會依你選的「模型」自動判斷供應商（gpt-* → OpenAI；claude-* → Anthropic），請填入對應的金鑰。</p>
+    <label for="keyInput">API Key（OpenAI sk-... 或 Anthropic sk-ant-...）</label>
+    <input type="password" id="keyInput" placeholder="sk-... / sk-ant-..." autocomplete="off">
+    <div class="hint">OpenAI：platform.openai.com → API keys ｜ Anthropic：console.anthropic.com → API Keys</div>
     <label for="modelSelect">模型</label>
     <select id="modelSelect">
-      <option value="claude-haiku-4-5">Claude Haiku 4.5（快速・便宜・推薦）</option>
-      <option value="claude-sonnet-4-6">Claude Sonnet 4.6（更精準）</option>
-      <option value="claude-opus-4-8">Claude Opus 4.8（最強・較慢較貴）</option>
+      <optgroup label="OpenAI（用 sk-... 金鑰）">
+        <option value="gpt-4o-mini">GPT-4o mini（快速・便宜・推薦）</option>
+        <option value="gpt-4.1-mini">GPT-4.1 mini（均衡）</option>
+        <option value="gpt-4o">GPT-4o（更精準）</option>
+        <option value="gpt-5-chat-latest">GPT-5 chat（最新・較貴）</option>
+      </optgroup>
+      <optgroup label="Anthropic（用 sk-ant- 金鑰）">
+        <option value="claude-haiku-4-5">Claude Haiku 4.5（快速・便宜）</option>
+        <option value="claude-sonnet-4-6">Claude Sonnet 4.6（更精準）</option>
+        <option value="claude-opus-4-8">Claude Opus 4.8（最強）</option>
+      </optgroup>
     </select>
     <div class="modal-actions">
       <button class="btn ghost" id="keyClearBtn">清除金鑰</button>
@@ -427,7 +436,7 @@ $("soundBtn").textContent=soundOn?"🔊":"🔇";
 /* ---------- AI 出題（使用者自帶 Anthropic 金鑰） ---------- */
 const KEY_STORE="ds_anthropic_key", MODEL_STORE="ds_model", AIMODE_KEY="ds_aimode";
 function getKey(){return localStorage.getItem(KEY_STORE)||"";}
-function getModel(){return localStorage.getItem(MODEL_STORE)||"claude-haiku-4-5";}
+function getModel(){return localStorage.getItem(MODEL_STORE)||"gpt-4o-mini";}
 let aiMode = localStorage.getItem(AIMODE_KEY)==="on";
 
 $("settingsBtn").onclick=()=>{ $("keyInput").value=getKey(); $("modelSelect").value=getModel(); $("settingsModal").classList.add("show"); };
@@ -483,14 +492,29 @@ Each item is an object:
   "a": 0-based index of the correct option
   "ex": a short explanation in Traditional Chinese
 Return ONLY a JSON array of 14 objects, nothing else.`;
-  const res=await fetch("https://api.anthropic.com/v1/messages",{
-    method:"POST",
-    headers:{"content-type":"application/json","x-api-key":key,"anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-access":"true"},
-    body:JSON.stringify({model:getModel(),max_tokens:3800,temperature:1,system:sys,messages:[{role:"user",content:prompt}]})
-  });
-  if(!res.ok){ throw new Error("api "+res.status); }
-  const data=await res.json();
-  let text=(data.content||[]).map(c=>c.text||"").join("").trim();
+  const model=getModel();
+  const isOpenAI=!/^claude/i.test(model);   // claude* → Anthropic；其餘(gpt*/o*)→ OpenAI
+  let res, data, text;
+  if(isOpenAI){
+    res=await fetch("https://api.openai.com/v1/chat/completions",{
+      method:"POST",
+      headers:{"content-type":"application/json","Authorization":"Bearer "+key},
+      body:JSON.stringify({model, max_tokens:3800, temperature:1,
+        messages:[{role:"system",content:sys},{role:"user",content:prompt}]})
+    });
+    if(!res.ok){ throw new Error("api "+res.status); }
+    data=await res.json();
+    text=((data.choices&&data.choices[0]&&data.choices[0].message.content)||"").trim();
+  }else{
+    res=await fetch("https://api.anthropic.com/v1/messages",{
+      method:"POST",
+      headers:{"content-type":"application/json","x-api-key":key,"anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-access":"true"},
+      body:JSON.stringify({model, max_tokens:3800, temperature:1, system:sys, messages:[{role:"user",content:prompt}]})
+    });
+    if(!res.ok){ throw new Error("api "+res.status); }
+    data=await res.json();
+    text=((data.content||[]).map(c=>c.text||"").join("")).trim();
+  }
   text=text.replace(/^```(?:json)?\s*/i,"").replace(/```$/,"").trim();
   const s=text.indexOf("["), e=text.lastIndexOf("]");
   if(s>=0&&e>s) text=text.slice(s,e+1);
