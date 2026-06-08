@@ -1025,3 +1025,173 @@ const LEVELS = [
   ]
 }
 ];
+
+/* ============ 每關閱讀測驗（短文 ≤300 字 + 3 題理解題） ============ */
+const READING = [
+/* 1 */ {title:"Tanjiro's Daily Life",
+  en:"Tanjiro Kamado lives high in the snowy mountains with his mother, his younger brothers and sisters, and his kind sister Nezuko. Their father died years ago, so Tanjiro is now the man of the house. Every morning he wakes up early, fills a large basket with charcoal, and carries it down the steep path to the town. The townspeople like him because he is honest and always wears a warm smile. He sells the charcoal, buys food for his family, and often helps his neighbors with small jobs. The family does not have much money, but they are happy because they love and support one another. At night, the children gather around the fire and listen to their mother's gentle voice. Tanjiro often says that protecting his family is the most important thing in his life.",
+  zh:"炭治郎與母親、弟妹和善良的妹妹禰豆子住在白雪皚皚的山上。父親多年前過世，他成了家中的支柱。每天清晨他早起，把木炭裝滿大簍背下山到鎮上販賣，再為家人買食物。鎮民喜歡他的誠實與笑容。家裡雖窮卻幸福。對他而言，守護家人是人生最重要的事。",
+  q:[
+    {t:"選擇題",q:"Where does Tanjiro live?",opts:["By the sea","High in the snowy mountains","In a big city","In a forest cave"],a:1,ex:"短文首句：lives high in the snowy mountains。"},
+    {t:"選擇題",q:"Why do the townspeople like Tanjiro?",opts:["He is rich","He is honest and friendly","He is a famous fighter","He gives free charcoal"],a:1,ex:"honest and always wears a warm smile。"},
+    {t:"是非題",q:"根據短文，炭治郎一家很富有。",opts:["正確 True","錯誤 False"],a:1,ex:"does not have much money，故為 False。"}
+  ]},
+/* 2 */ {title:"The Night Everything Changed",
+  en:"It was late winter, and Tanjiro had gone down to the town to sell charcoal. Because of the heavy snow, a kind old man asked him to stay the night, so he could not return home until morning. As Tanjiro was climbing the mountain the next day, he smelled blood in the cold air. His heart was beating fast. When he reached his house, he found a terrible sight: a demon had attacked his family during the night. Only Nezuko was still warm. Tanjiro lifted her onto his back and began running down the mountain to find a doctor. The snow was falling, the wind was blowing, and tears were freezing on his face. He did not know that his sister was slowly changing into something no longer human.",
+  zh:"冬末，炭治郎下山賣炭，因大雪被好心老人留宿一晚，隔天清晨才返家。上山途中他聞到血腥味，心跳加速。回到家，發現家人被鬼襲擊，只有禰豆子尚有體溫。他背起妹妹奔下山求醫。風雪交加，淚水在臉上結凍。他還不知道妹妹正逐漸變成非人之物。",
+  q:[
+    {t:"選擇題",q:"Why couldn't Tanjiro go home that night?",opts:["He was lost","Heavy snow, an old man asked him to stay","He was hurt","He missed the train"],a:1,ex:"heavy snow, a kind old man asked him to stay the night。"},
+    {t:"選擇題",q:"What did Tanjiro smell as he climbed the mountain?",opts:["Smoke","Flowers","Blood","Food"],a:2,ex:"he smelled blood in the cold air。"},
+    {t:"是非題",q:"短文中，只有禰豆子還活著（尚有體溫）。",opts:["正確 True","錯誤 False"],a:0,ex:"Only Nezuko was still warm，故為 True。"}
+  ]},
+/* 3 */ {title:"A Sister Who Became a Demon",
+  en:"As Tanjiro carried Nezuko through the deep snow, she suddenly grew larger and attacked him. He realized with horror that his gentle sister had become a demon. Her eyes were red and her teeth were sharp, yet something inside her still remembered who she was. When Tanjiro cried and begged her to stop, Nezuko slowly lowered her arms. A single tear fell from her eye. She did not bite him. Instead, she stood in front of her brother as if to protect him. Tanjiro held her tightly and promised that he would find a way to turn her back into a human. That promise gave him the strength to keep going, even though he had lost almost everything he loved on that cold and terrible night.",
+  zh:"炭治郎背著禰豆子穿越深雪時，她突然變大並攻擊他——他驚恐地發現溫柔的妹妹已成為鬼。她紅眼利齒，但內心仍記得自己是誰。當炭治郎哭著求她停手，禰豆子緩緩放下手臂，落下一滴淚，沒有咬他，反而擋在哥哥面前護著他。炭治郎緊抱她，發誓要找到讓她變回人類的方法。",
+  q:[
+    {t:"選擇題",q:"What happened to Nezuko in the snow?",opts:["She fell asleep","She became a demon and attacked him","She ran away","She found a doctor"],a:1,ex:"she suddenly grew larger and attacked him。"},
+    {t:"選擇題",q:"What did Nezuko do instead of biting Tanjiro?",opts:["She cried and protected him","She ran into town","She ate the snow","She fell down"],a:0,ex:"stood in front of her brother as if to protect him。"},
+    {t:"是非題",q:"炭治郎發誓要把妹妹變回人類。",opts:["正確 True","錯誤 False"],a:0,ex:"promised he would turn her back into a human，True。"}
+  ]},
+/* 4 */ {title:"The Water Hashira",
+  en:"While Tanjiro was protecting Nezuko, a tall swordsman appeared in the falling snow. His name was Giyu Tomioka, and he was a member of the Demon Slayer Corps. Giyu was holding his sword, ready to kill the demon girl, because slayers are trained to destroy all demons. Tanjiro threw himself on the ground and begged Giyu to spare his sister. While the two were arguing, Nezuko stood in front of her brother and refused to attack the human. Giyu was watching her carefully. He had never seen a demon protect a human before. In the end, he did not kill them. Instead, he told Tanjiro to visit a man named Urokodaki, who could train him to become strong. That meeting changed the path of Tanjiro's life forever.",
+  zh:"當炭治郎護著禰豆子時，高大的劍士富岡義勇在風雪中現身——他是鬼殺隊的一員。義勇握刀欲斬鬼少女，因隊士受訓要消滅所有鬼。炭治郎跪地懇求他饒過妹妹。兩人爭執時，禰豆子擋在哥哥面前拒絕攻擊人類。義勇仔細觀察，從未見過鬼保護人。最後他沒下手，要炭治郎去找能訓練他的鱗瀧。",
+  q:[
+    {t:"選擇題",q:"Who was Giyu Tomioka?",opts:["A doctor","A member of the Demon Slayer Corps","A charcoal seller","A demon"],a:1,ex:"a member of the Demon Slayer Corps。"},
+    {t:"選擇題",q:"Why did Giyu finally not kill them?",opts:["He was too tired","Nezuko protected a human, which surprised him","Tanjiro paid him","The sun rose"],a:1,ex:"he had never seen a demon protect a human。"},
+    {t:"是非題",q:"義勇要炭治郎去找鱗瀧接受訓練。",opts:["正確 True","錯誤 False"],a:0,ex:"told Tanjiro to visit Urokodaki，True。"}
+  ]},
+/* 5 */ {title:"A Promise and a Path",
+  en:"After that night, Tanjiro made a powerful promise. He said, \"I will turn Nezuko back into a human, and I will find the demon who hurt my family.\" He knew the road ahead would be long and dangerous, but he was not going to give up. Following Giyu's advice, he climbed a far mountain to find Urokodaki, a former Water Hashira who now trained young slayers. Urokodaki agreed to teach him, but warned that the training would be harder than anything Tanjiro had ever done. \"If you are serious,\" the old man said, \"you are going to suffer, and you may even die.\" Tanjiro nodded. He was going to become a Demon Slayer, no matter the cost, because he carried both his sister and the memory of his family on his back.",
+  zh:"那夜之後，炭治郎立下重誓：「我要把禰豆子變回人類，也要找出傷害家人的鬼。」他知道前路漫長危險，卻不打算放棄。依義勇之言，他翻越遠山尋找昔日水柱鱗瀧。鱗瀧答應教他，但警告訓練極其嚴酷甚至可能喪命。炭治郎點頭——無論代價，他都要成為鬼殺隊士，因他背負著妹妹與家人的記憶。",
+  q:[
+    {t:"選擇題",q:"What two things did Tanjiro promise?",opts:["To get rich and move away","To cure Nezuko and find the demon","To leave the mountains","To become a doctor"],a:1,ex:"turn Nezuko back... and find the demon。"},
+    {t:"選擇題",q:"What did Urokodaki warn about the training?",opts:["It was easy","It would be very hard and dangerous","It was free","It took one day"],a:1,ex:"harder than anything... you may even die。"},
+    {t:"是非題",q:"炭治郎決定放棄成為鬼殺隊士。",opts:["正確 True","錯誤 False"],a:1,ex:"He was going to become a Demon Slayer，故 False。"}
+  ]},
+/* 6 */ {title:"Two Years of Training",
+  en:"Tanjiro has trained under Urokodaki for almost two years. During that time, he has climbed the mountain countless times, learned the ten forms of Water Breathing, and grown much stronger than before. The training has been painful, and he has often fallen, but he has never given up. Urokodaki has given him one final test: he must cut a huge boulder with his sword. For half a year Tanjiro has failed again and again. Then two strange masked children, Sabito and Makomo, have appeared to help him improve. With their guidance, his breathing has become deeper and his focus sharper. One quiet morning, Tanjiro finally swings his blade and cuts the great rock in two. His training is complete, and now he is ready for the Final Selection.",
+  zh:"炭治郎已在鱗瀧門下訓練近兩年，無數次爬山、學會水之呼吸十式，變得更強。訓練痛苦，他常跌倒卻從不放棄。鱗瀧給最後考驗：以刀斬開巨石。半年來他屢試屢敗，後有兩名戴面具的孩子錆兔、真菰前來相助，使他呼吸更深、專注更利。某個清晨，他終於一刀劈開巨石，修行完成，準備迎接最終選別。",
+  q:[
+    {t:"選擇題",q:"How long has Tanjiro trained under Urokodaki?",opts:["A few weeks","Almost two years","Ten years","One month"],a:1,ex:"for almost two years。"},
+    {t:"選擇題",q:"What was Urokodaki's final test?",opts:["To run up the mountain","To cut a huge boulder with his sword","To beat a demon","To hold his breath for an hour"],a:1,ex:"he must cut a huge boulder。"},
+    {t:"是非題",q:"Sabito 與 Makomo 幫助炭治郎進步。",opts:["正確 True","錯誤 False"],a:0,ex:"appeared to help him improve，True。"}
+  ]},
+/* 7 */ {title:"The Final Selection",
+  en:"The Final Selection takes place on Mount Fujikasane, where the demons are more dangerous than anywhere else. Young people who want to join the Demon Slayer Corps must survive there for seven nights. Many of them never come back. On the mountain, Tanjiro meets demons that are taller and stronger than he is, but he is faster and smarter than they expect. His sword is sharper than their claws, and his will is stronger than his fear. The nights are darker and colder than any he has known. He saves another young fighter and refuses to leave anyone behind. After seven long nights, the sun rises and Tanjiro is still alive. He has passed the test and is now officially a Demon Slayer, ready to begin his real journey.",
+  zh:"最終選別在藤襲山舉行，那裡的鬼比任何地方都危險。想加入鬼殺隊的年輕人須在此存活七夜，許多人一去不回。山上的鬼比炭治郎更高更強，但他更快更聰明；他的刀比鬼爪更利，意志比恐懼更強。夜更黑更冷。他救了另一名年輕戰士，不願拋下任何人。七夜過後旭日東昇，他存活下來，正式成為鬼殺隊士。",
+  q:[
+    {t:"選擇題",q:"How many nights must they survive on the mountain?",opts:["Three","Five","Seven","Ten"],a:2,ex:"survive there for seven nights。"},
+    {t:"選擇題",q:"How is Tanjiro compared with the demons?",opts:["Bigger and slower","Faster and smarter","Weaker and afraid","Older and tired"],a:1,ex:"faster and smarter than they expect。"},
+    {t:"是非題",q:"炭治郎在選別中拋下其他人獨自求生。",opts:["正確 True","錯誤 False"],a:1,ex:"refuses to leave anyone behind，故 False。"}
+  ]},
+/* 8 */ {title:"The Hand Demon",
+  en:"On the mountain, Tanjiro meets the scariest enemy he has ever faced: the Hand Demon. It has the longest arms and the sharpest claws, and it laughs that it has eaten the most students of Urokodaki. The demon is the strongest creature on Fujikasane, and the battle becomes the hardest of Tanjiro's life. He remembers the voices of Sabito and Makomo, takes a deep breath, and uses the most powerful Water Breathing form he knows. With one clean strike, he cuts off the demon's head. Before it dies, the demon's anger fades, and Tanjiro feels sorrow rather than hatred for it. That night, he becomes one of the bravest warriors on the mountain, but he never forgets that demons were once human too.",
+  zh:"山上，炭治郎遇上他見過最可怕的敵人——手鬼。牠手臂最長、爪子最利，並大笑說吃掉了最多鱗瀧的弟子，是藤襲山最強的怪物，這場戰鬥成了炭治郎此生最艱難的一役。他想起錆兔與真菰的聲音，深吸一口氣，使出最強的水之呼吸，一刀斬下鬼首。鬼臨死前怒氣消散，炭治郎感到的是悲憫而非仇恨。",
+  q:[
+    {t:"選擇題",q:"What did the Hand Demon brag about?",opts:["Being the fastest","Eating the most of Urokodaki's students","Living the longest","Having gold"],a:1,ex:"it has eaten the most students of Urokodaki。"},
+    {t:"選擇題",q:"How did Tanjiro feel toward the demon before it died?",opts:["Hatred","Sorrow / pity","Fear","Joy"],a:1,ex:"he feels sorrow rather than hatred。"},
+    {t:"是非題",q:"炭治郎用最強的水之呼吸招式擊敗手鬼。",opts:["正確 True","錯誤 False"],a:0,ex:"the most powerful Water Breathing form，True。"}
+  ]},
+/* 9 */ {title:"The Power of Breathing",
+  en:"After joining the Corps, Tanjiro can now use all ten forms of Water Breathing. When he was younger, he could not even hold his breath for long, but training has changed him. Total Concentration Breathing lets a slayer move faster, hit harder, and stay calm in battle. Tanjiro can sense a demon by smell, and he can read the \"threads\" of an enemy's movements. His sister Nezuko has her own strange power: she can sleep for many days to recover her strength, and she can change her size. Demons cannot walk under the bright sun, so Nezuko hides in a special box on Tanjiro's back during the day. Together, the brother and sister can face dangers that neither of them could face alone.",
+  zh:"加入鬼殺隊後，炭治郎已能使出水之呼吸全部十式。年幼時他連長時間屏息都做不到，是訓練改變了他。全集中呼吸讓隊士更快、更猛、更冷靜。炭治郎能以氣味察覺鬼，並讀出敵人動作的「線」。禰豆子也有奇特能力：能睡數日恢復力量、改變體型。鬼無法在烈日下行走，故白天禰豆子藏於哥哥背上的木箱中。兄妹同心，方能面對獨自無法面對的危險。",
+  q:[
+    {t:"選擇題",q:"What can Total Concentration Breathing do?",opts:["Make a slayer invisible","Help a slayer move faster and stay calm","Cure demons","Stop the rain"],a:1,ex:"move faster, hit harder, and stay calm。"},
+    {t:"選擇題",q:"Why does Nezuko hide in a box during the day?",opts:["She is shy","Demons cannot walk under the bright sun","She is sleeping forever","It is cold"],a:1,ex:"Demons cannot walk under the bright sun。"},
+    {t:"是非題",q:"炭治郎能靠氣味察覺鬼。",opts:["正確 True","錯誤 False"],a:0,ex:"can sense a demon by smell，True。"}
+  ]},
+/* 10 */ {title:"Rules of the Corps",
+  en:"The Demon Slayer Corps is a secret group that has protected humans for hundreds of years. As a new member, Tanjiro must follow strict rules. He must protect humans with his life, and he must not let any demon harm innocent people. He has to wear the Corps uniform and carry a Nichirin sword, a special blade that can kill demons. Members should rest well before every mission and should always respect the Hashira, the strongest swordsmen in the group. The most difficult rule for Tanjiro is this: demons must be destroyed. Because Nezuko is a demon, he has to keep her a secret and prove that she will never hurt a human. He promises the leaders that he will take full responsibility for his sister.",
+  zh:"鬼殺隊是守護人類數百年的祕密組織。身為新成員，炭治郎須遵守嚴格規矩：必須以生命保護人類，絕不可讓鬼傷害無辜；必須穿隊服、佩日輪刀（能斬鬼的特殊刀）。成員每次任務前應充分休息，並永遠尊敬最強劍士「柱」。最難的規矩是：鬼必須被消滅。因禰豆子是鬼，他得保守祕密並證明她絕不傷人，並向高層承諾為妹妹負全責。",
+  q:[
+    {t:"選擇題",q:"What is a Nichirin sword?",opts:["A wooden practice sword","A special blade that can kill demons","A gift from the town","A kitchen knife"],a:1,ex:"a special blade that can kill demons。"},
+    {t:"選擇題",q:"Why is one rule especially hard for Tanjiro?",opts:["He hates uniforms","His sister Nezuko is a demon","He cannot use a sword","He is afraid of the Hashira"],a:1,ex:"demons must be destroyed, but Nezuko is a demon。"},
+    {t:"是非題",q:"炭治郎答應為妹妹負全責。",opts:["正確 True","錯誤 False"],a:0,ex:"take full responsibility for his sister，True。"}
+  ]},
+/* 11 */ {title:"The Butterfly Estate",
+  en:"After a hard battle, Tanjiro was taken to the Butterfly Estate, a peaceful home where injured slayers are healed. His deep wounds were treated by Shinobu Kocho and her gentle helpers. Special medicine is made there from rare mountain flowers, and the whole garden is filled with beautiful butterflies. While he was resting, Tanjiro was also trained again, because a slayer must always grow stronger. New breathing techniques were taught to him by the kind girls who lived there. The estate is known across the Corps for healing the body and the heart. Many lives have been saved by Shinobu's medicine and care. When his body was strong again, Tanjiro was tested and allowed to return to the field, ready for even greater dangers.",
+  zh:"一場硬仗後，炭治郎被送到蝴蝶屋——治療受傷隊士的寧靜居所。他的深傷由胡蝶忍與溫柔助手們治療；那裡用稀有山花製藥，滿園美麗蝴蝶。休養期間他也再次受訓，因隊士須不斷變強。屋裡善良的女孩傳授他新呼吸法。蝴蝶屋以療癒身心聞名，許多生命因忍的藥與照顧而獲救。身體康復後，炭治郎通過測試重返戰場。",
+  q:[
+    {t:"選擇題",q:"What is the Butterfly Estate used for?",opts:["Training demons","Healing injured slayers","Selling charcoal","Hiding treasure"],a:1,ex:"a peaceful home where injured slayers are healed。"},
+    {t:"選擇題",q:"What is the special medicine made from?",opts:["Demon blood","Rare mountain flowers","Sea water","Iron"],a:1,ex:"made from rare mountain flowers。"},
+    {t:"是非題",q:"許多生命因忍的藥而獲救。",opts:["正確 True","錯誤 False"],a:0,ex:"Many lives have been saved by Shinobu's medicine，True。"}
+  ]},
+/* 12 */ {title:"Someone to Protect",
+  en:"Tanjiro fights for a reason. He fights to save his sister and to protect every innocent person from demons. \"I want to become strong enough to defeat Muzan, the demon who started all of this,\" he says. His friends are not always brave. Zenitsu is often too scared to move, yet he still tries his best when it matters most. Tanjiro tells them that they need to work together to survive their missions. He has decided to follow the smell of each demon, even when the path is dangerous, because he hopes to find a cure for Nezuko. It is important to stay calm in battle, he reminds himself. Above all, Tanjiro promises never to give up on the people he loves.",
+  zh:"炭治郎為了理由而戰：為了拯救妹妹、保護每個無辜的人免受鬼害。他說：「我要變得夠強，去打敗一切的元兇——無慘。」他的夥伴未必勇敢，善逸常嚇得動彈不得，但關鍵時刻仍盡力而為。炭治郎說他們必須合作才能生還。他決定循著每隻鬼的氣味前進，即使路途危險，只因希望找到治癒妹妹的方法。他提醒自己戰鬥要冷靜，更發誓永不放棄所愛之人。",
+  q:[
+    {t:"選擇題",q:"Why does Tanjiro fight?",opts:["For money and fame","To save his sister and protect innocent people","To become a Hashira quickly","To leave the Corps"],a:1,ex:"to save his sister and to protect every innocent person。"},
+    {t:"選擇題",q:"What is true about Zenitsu?",opts:["He is fearless","He is often scared but still tries","He hates Tanjiro","He is a demon"],a:1,ex:"often too scared to move, yet he still tries。"},
+    {t:"是非題",q:"炭治郎想打敗無慘。",opts:["正確 True","錯誤 False"],a:0,ex:"strong enough to defeat Muzan，True。"}
+  ]},
+/* 13 */ {title:"Zenitsu and Inosuke",
+  en:"On his journey, Tanjiro travels with two unusual companions. Running through the forest and fighting wild animals are Inosuke's favorite things; he wears a boar's head and loves climbing trees and shouting loudly. Zenitsu, on the other hand, hates fighting and keeps complaining about everything. Yet there is a secret: Zenitsu becomes an amazing swordsman while he is sleeping, using powerful Thunder Breathing without even knowing it. Tanjiro is good at smelling danger and at understanding people's feelings. He enjoys helping others, and he keeps practicing his breathing every single morning. The three boys argue often, but they also protect one another. By learning, training, and never giving up, they slowly become a strong and loyal team.",
+  zh:"旅途中，炭治郎有兩名奇特的夥伴。在森林裡奔跑、與野獸搏鬥是伊之助最愛的事；他戴著野豬頭，愛爬樹、大聲吼叫。善逸則討厭戰鬥，總是抱怨；但有個祕密：他在睡夢中會變成驚人的劍士，無意識地使出雷之呼吸。炭治郎擅長嗅出危險、體察人心，喜歡助人，每天清晨持續練習呼吸。三人常吵架，卻也彼此守護，逐漸成為堅強忠誠的隊伍。",
+  q:[
+    {t:"選擇題",q:"What is special about Zenitsu?",opts:["He never sleeps","He fights amazingly while sleeping","He cannot use breathing","He is the strongest awake"],a:1,ex:"becomes an amazing swordsman while he is sleeping。"},
+    {t:"選擇題",q:"What are Inosuke's favorite things?",opts:["Reading and cooking","Running, fighting, and climbing trees","Sleeping all day","Selling charcoal"],a:1,ex:"running... fighting... climbing trees and shouting loudly。"},
+    {t:"是非題",q:"炭治郎每天早上持續練習呼吸法。",opts:["正確 True","錯誤 False"],a:0,ex:"keeps practicing his breathing every single morning，True。"}
+  ]},
+/* 14 */ {title:"The Flame Hashira",
+  en:"On the Mugen Train, Tanjiro met Kyojuro Rengoku, the Flame Hashira who never lets his heart burn out. The train, which carried hundreds of sleeping passengers, was the hiding place of a powerful demon that trapped people inside their dreams. Rengoku, whose bright spirit gave everyone courage, fought the demon that attacked the passengers all night long. He protected everyone who was on the train, even when he was badly hurt. In the end, Rengoku faced an Upper Rank demon far stronger than himself. Although he could not win, he refused to run, and he saved every passenger before the sun rose. His last words, \"Set your heart ablaze,\" became a light that Tanjiro would carry for the rest of his life.",
+  zh:"在無限列車上，炭治郎遇見炎柱煉獄杏壽郎——心火永不熄滅之人。那班載著數百名沉睡乘客的列車，藏著能把人困在夢中的強大鬼。煉獄以明亮的精神給眾人勇氣，整夜對抗攻擊乘客的鬼，即使重傷仍護住所有人。最後他面對遠強於己的上弦之鬼，雖無法取勝卻拒絕逃跑，在日出前救下每位乘客。他的遺言「燃燒你的心」，成為炭治郎一生的光。",
+  q:[
+    {t:"選擇題",q:"What did the demon on the train do to people?",opts:["Stole their money","Trapped them in their dreams","Turned them to stone","Made them demons"],a:1,ex:"trapped people inside their dreams。"},
+    {t:"選擇題",q:"What were Rengoku's last words?",opts:["\"Run away\"","\"Set your heart ablaze\"","\"Goodbye forever\"","\"I give up\""],a:1,ex:"\"Set your heart ablaze\"。"},
+    {t:"是非題",q:"煉獄在重傷時仍保護列車上所有人。",opts:["正確 True","錯誤 False"],a:0,ex:"protected everyone... even when he was badly hurt，True。"}
+  ]},
+/* 15 */ {title:"The Sound Hashira",
+  en:"Tengen Uzui, the Sound Hashira, is loud and flashy, but he is also a brilliant fighter. He took Tanjiro, Zenitsu, and Inosuke to the entertainment district, where women had been disappearing for a long time. The team could fight together or split up to search, so they spread out through the busy streets. The demon hiding there was very strong, but the slayers refused to run. Tengen shouted orders, and the boys searched house after house. It was dangerous, so everyone had to stay alert through the night. In the end, two powerful demons appeared, and the battle was fierce. The friends could win, or they could lose everything, but by working as one team they finally protected the people of the district.",
+  zh:"音柱宇髓天元既吵鬧又華麗，卻是出色的戰士。他帶炭治郎、善逸、伊之助前往女子長期失蹤的花街。隊伍可一起戰鬥或分頭搜查，於是散入熱鬧街巷。藏匿的鬼非常強大，但隊士拒絕逃跑。天元高喊命令，少年們逐屋搜索。情勢危險，整夜須保持警戒。最後兩隻強大的鬼現身，戰況激烈。他們可能贏、也可能失去一切，但靠著團結，終於守護了花街的人們。",
+  q:[
+    {t:"選擇題",q:"Why did the team go to the entertainment district?",opts:["To have a party","Women had been disappearing there","To buy swords","To rest"],a:1,ex:"women had been disappearing for a long time。"},
+    {t:"選擇題",q:"How did the friends finally protect the people?",opts:["By running away","By working as one team","By hiding","By paying the demon"],a:1,ex:"by working as one team。"},
+    {t:"是非題",q:"宇髓天元只是吵鬧，並不會打鬥。",opts:["正確 True","錯誤 False"],a:1,ex:"he is also a brilliant fighter，故 False。"}
+  ]},
+/* 16 */ {title:"Before the Final War",
+  en:"Because Muzan, the demon king, was growing stronger, the Demon Slayer Corps began to prepare for a final war. Although the slayers were tired from many battles, they kept training every single day. When night came, the demons would rise again, so the slayers learned to fight in the dark. Tanjiro stayed calm even though he often felt afraid inside. Because Nezuko had learned to resist the sun, she gave everyone new hope. The Hashira gathered when the time was right to share their plans. Although they had lost many friends, they did not lose their will to fight. They knew the path ahead was dark, but they walked forward together, believing that one day the sun would rise on a world without demons.",
+  zh:"因鬼王無慘日益強大，鬼殺隊開始為最終決戰做準備。雖然隊士們因多場戰鬥而疲憊，他們仍每天不停訓練。夜晚一到，鬼便再現，故隊士學會在黑暗中作戰。炭治郎內心常感害怕，卻保持冷靜。因禰豆子已能抵抗陽光，給了大家新希望。時機成熟時，柱們集結共商計畫。雖失去許多夥伴，他們未失鬥志，明知前路黑暗，仍一同前行，相信終有一天無鬼之世將迎來旭日。",
+  q:[
+    {t:"選擇題",q:"Why did the Corps prepare for a final war?",opts:["Muzan was growing stronger","They wanted gold","The Hashira were bored","The sun stopped rising"],a:0,ex:"Because Muzan... was growing stronger。"},
+    {t:"選擇題",q:"Why did Nezuko give everyone hope?",opts:["She could cook well","She had learned to resist the sun","She became human","She found Muzan"],a:1,ex:"Nezuko had learned to resist the sun。"},
+    {t:"是非題",q:"隊士們失去夥伴後也失去了鬥志。",opts:["正確 True","錯誤 False"],a:1,ex:"they did not lose their will to fight，故 False。"}
+  ]},
+/* 17 */ {title:"The Hashira Unite",
+  en:"At last the final battle began, and all the Hashira came together. \"If we work together, we will defeat Muzan,\" they said. They had one great advantage: if the sun rises before he dies, Muzan will burn to ashes. So their plan was simple but deadly: hold him until dawn. \"You will lose your life if you make even one mistake,\" Giyu warned the younger slayers. \"But if we do not give up, the morning will come for everyone.\" If Nezuko joined them, they would have a real chance, because she was a demon who could stand in the sun. Through the long night, slayer after slayer attacked the demon king. If they could survive until sunrise, the world would finally be free.",
+  zh:"最終決戰終於展開，眾柱齊聚。「只要齊心協力，就能打敗無慘，」他們說。他們有一大優勢：若在他死前太陽升起，無慘將化為灰燼。於是計畫簡單卻致命——拖住他直到黎明。義勇警告年輕隊士：「只要犯一個錯就會送命，但只要不放棄，黎明就會為所有人到來。」若禰豆子加入，他們便有真正勝算，因她是能立於陽光下的鬼。漫漫長夜，隊士前仆後繼攻向鬼王。",
+  q:[
+    {t:"選擇題",q:"What was the slayers' plan?",opts:["Run from Muzan","Hold Muzan until the sun rises","Make peace with him","Hide underground"],a:1,ex:"hold him until dawn / the sun rises。"},
+    {t:"選擇題",q:"Why would Nezuko give them a real chance?",opts:["She was the strongest","She was a demon who could stand in the sun","She knew Muzan's name","She could fly"],a:1,ex:"a demon who could stand in the sun。"},
+    {t:"是非題",q:"陽光升起會讓無慘化為灰燼。",opts:["正確 True","錯誤 False"],a:0,ex:"if the sun rises... Muzan will burn to ashes，True。"}
+  ]},
+/* 18 */ {title:"If I Were Stronger",
+  en:"During the long battle, Tanjiro often thought about strength. \"If I were stronger, I would protect everyone,\" he whispered to himself. \"If we had more time, we would save more lives.\" He remembered Rengoku and thought, \"If he were here, he would tell us to set our hearts ablaze.\" Fear filled his chest, but he did not run. \"If I weren't afraid, I would smile like him,\" he said quietly. He wished he could turn back time to save his family, yet he knew that wishing alone would change nothing. So instead of dreaming about what he could not do, Tanjiro chose to act with the strength he already had. Step by step, he kept fighting, believing that small, brave choices could change the world.",
+  zh:"漫長的戰鬥中，炭治郎常思索何謂強大。「如果我更強，就能保護所有人，」他低語。「如果我們有更多時間，就能救更多人。」他想起煉獄：「如果他在，會叫我們燃燒自己的心。」恐懼充滿胸口，他卻不逃。「如果我不害怕，就能像他一樣微笑，」他輕聲說。他多希望能讓時間倒流救回家人，卻明白光是空想改變不了什麼。於是他選擇用既有的力量行動，一步一步堅持戰鬥，相信微小而勇敢的選擇能改變世界。",
+  q:[
+    {t:"選擇題",q:"What did Tanjiro mainly think about during the battle?",opts:["Food","Strength and protecting others","Going home to sleep","Money"],a:1,ex:"he often thought about strength。"},
+    {t:"選擇題",q:"What did Tanjiro finally choose to do?",opts:["Run away","Act with the strength he already had","Wait for help","Give up"],a:1,ex:"chose to act with the strength he already had。"},
+    {t:"是非題",q:"炭治郎認為光靠空想就能改變一切。",opts:["正確 True","錯誤 False"],a:1,ex:"wishing alone would change nothing，故 False。"}
+  ]},
+/* 19 */ {title:"Where Is Muzan?",
+  en:"For a long time, the slayers needed to know where Muzan was hiding. \"Do you know when he will appear?\" Tanjiro asked Tamayo, a kind demon doctor who was also Muzan's enemy. Nobody truly understood why he hated humans so much. Tamayo explained what the demon king feared most and how the slayers might defeat him. \"Can you tell me how we can turn him into ashes?\" Tanjiro asked. She told them about a special medicine that could make Muzan weak and human again. The slayers also wondered who had created the very first demon, and the answer was always the same: Muzan himself. By learning his secrets, the Corps finally understood how to bring the long nightmare to an end.",
+  zh:"長久以來，隊士們需要知道無慘藏在何處。「你知道他何時會現身嗎？」炭治郎問珠世——一位善良、同時與無慘為敵的鬼醫。沒有人真正明白他為何如此憎恨人類。珠世解釋了鬼王最害怕的東西，以及擊敗他的方法。「你能告訴我，我們如何讓他化為灰燼嗎？」炭治郎問。她說起一種能使無慘虛弱、變回人類的特殊藥。隊士也好奇是誰創造了第一隻鬼，答案始終是無慘本人。",
+  q:[
+    {t:"選擇題",q:"Who was Tamayo?",opts:["A Hashira","A kind demon doctor and Muzan's enemy","A passenger","Tanjiro's mother"],a:1,ex:"a kind demon doctor who was also Muzan's enemy。"},
+    {t:"選擇題",q:"What did Tamayo's special medicine do?",opts:["Healed wounds only","Could make Muzan weak and human again","Made slayers stronger","Cured Zenitsu's fear"],a:1,ex:"make Muzan weak and human again。"},
+    {t:"是非題",q:"創造第一隻鬼的是無慘本人。",opts:["正確 True","錯誤 False"],a:0,ex:"the answer was always... Muzan himself，True。"}
+  ]},
+/* 20 */ {title:"The Dawn Arrives",
+  en:"After the longest night, the sun finally rose, and the demon king was gone forever. \"We won, didn't we?\" Tanjiro whispered, hardly believing it. His friends were hurt and tired, but they were alive. The warm light touched Nezuko's face, and slowly she became fully human again. \"Nezuko is human again, isn't she?\" Tanjiro asked, with tears in his eyes. \"You won't forget our friends who fell, will you?\" Zenitsu said softly, and everyone nodded. They had fought bravely, and now a long age of peace could begin. \"We can finally live in peace, can't we?\" Inosuke grinned. As the morning sun rose over the mountains, the survivors smiled and promised to protect the gentle world their friends had died to save.",
+  zh:"最漫長的一夜過後，太陽終於升起，鬼王永遠消失了。「我們贏了，不是嗎？」炭治郎難以置信地輕聲說。夥伴們傷痕累累卻都還活著。溫暖的陽光照上禰豆子的臉，她緩緩變回完全的人。「禰豆子又變回人了，不是嗎？」炭治郎含淚問。「你不會忘記犧牲的夥伴，會嗎？」善逸輕聲說，眾人點頭。他們英勇奮戰，和平的時代終將開始。「我們終於能在和平中生活了，不是嗎？」伊之助咧嘴笑。晨曦升起，倖存者微笑著，誓言守護夥伴用生命換來的溫柔世界。",
+  q:[
+    {t:"選擇題",q:"What happened to Nezuko when the sun touched her?",opts:["She disappeared","She became fully human again","She fell asleep","She grew larger"],a:1,ex:"slowly she became fully human again。"},
+    {t:"選擇題",q:"What did the survivors promise at the end?",opts:["To find more demons","To protect the peaceful world","To leave the Corps","To forget the past"],a:1,ex:"promised to protect the gentle world。"},
+    {t:"是非題",q:"故事結尾無慘仍然存在。",opts:["正確 True","錯誤 False"],a:1,ex:"the demon king was gone forever，故 False。"}
+  ]}
+];
+/* 合併：把短文掛到各關，並把閱讀題加入該關題庫(cat:"r") */
+READING.forEach(function(r,i){
+  if(!LEVELS[i]) return;
+  LEVELS[i].reading = {title:r.title, en:r.en, zh:r.zh};
+  r.q.forEach(function(q){ LEVELS[i].bank.push(Object.assign({cat:"r"}, q)); });
+});
