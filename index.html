@@ -275,7 +275,7 @@
 <div class="wrap">
   <header>
     <div class="logo">🗡️ 鬼滅之刃 英語修行<span class="en">DEMON SLAYER · ENGLISH QUEST</span></div>
-    <div class="tagline">跟著炭治郎修行英文 ｜ 20 關 × 單一文法主題（每關 10 例句配圖＋10 單字＋閱讀短文）｜ 難度：國中二～三年級 ｜ 每關隨機 10 題（含閱讀理解）、限時 20 分鐘、全對才能通關</div>
+    <div class="tagline">跟著鬼殺隊討伐十二鬼月與鬼王無慘 ｜ 13 關 × 每關 2+ 文法主題（10 例句配圖＋10 單字＋閱讀短文）｜ 難度：國中二～三年級 ｜ 每關隨機 15 題（閱讀5＋文法5＋單字5）、限時 15 分鐘、全對才能通關</div>
   </header>
 
   <div class="topbar">
@@ -310,7 +310,7 @@
       <div id="grammarBox"></div>
     </div>
     <div class="reading-box">
-      <h4>📖 閱讀測驗 Reading（挑戰時會考 3 題理解題）</h4>
+      <h4>📖 閱讀測驗 Reading（挑戰時會考 5 題理解題）</h4>
       <h5 id="readPassageTitle"></h5>
       <p class="passage-en" id="readPassageEn"></p>
       <p class="passage-zh" id="readPassageZh"></p>
@@ -426,7 +426,7 @@
    ========================================================================= */
 
 const SAVE_KEY = "demonslayer_eng_v1";
-const QUIZ_N = 10, START_HEARTS = 3;
+const QUIZ_N = 15, START_HEARTS = 3;
 
 let state = load();
 function load(){
@@ -498,17 +498,17 @@ async function generateAIQuestions(lv){
   const scene=scenes[Math.floor(Math.random()*scenes.length)];
   const seed=Math.floor(Math.random()*1e9);
   const passage=lv.reading?lv.reading.en:"";
-  const prompt=`Create exactly 14 English questions for ONE level of a Demon Slayer (鬼滅之刃) learning game.
+  const prompt=`Create exactly 18 English questions for ONE level of a Demon Slayer (鬼滅之刃) learning game.
 Random seed: ${seed}. Use this seed so the set is DIFFERENT from any previous set — vary sentences, names, scenes and which options are correct.
 Suggested scene flavor for this batch: ${scene}（但可自由變化）.
 
 READING PASSAGE for this level (write the reading-comprehension questions based ONLY on this text):
 """${passage}"""
 
-COMPOSITION (exactly 14):
-- 5 GRAMMAR questions testing ONLY this point: ${lv.rank} (${lv.focus}).
-- 5 VOCABULARY questions on these words (meaning, synonym/antonym, or correct usage): ${vocabList}.
-- 4 READING-COMPREHENSION questions answerable ONLY from the passage above (use "t":"閱讀題"); ask about facts, reason, or main idea.
+COMPOSITION (exactly 18):
+- 6 GRAMMAR questions covering these grammar point(s) for this level: ${lv.focus} (${lv.rank}). The level may have TWO OR MORE grammar topics — cover all of them.
+- 6 VOCABULARY questions on these words (meaning, synonym/antonym, or correct usage): ${vocabList}.
+- 6 READING-COMPREHENSION questions answerable ONLY from the passage above (use "t":"閱讀題"); ask about facts, reason, or main idea.
 
 USE A VARIETY OF QUESTION FORMATS (mix them, do not make them all the same):
 - "選擇題" 一般四選一
@@ -521,7 +521,7 @@ USE A VARIETY OF QUESTION FORMATS (mix them, do not make them all the same):
 - "翻譯題" 選出中文句子對應的正確英文 (或英翻中)
 RULES:
 - Difficulty: Taiwan junior high grade 8-9; keep sentences short.
-- DO NOT repeat the same word, sentence pattern, or answer wording twice. Each of the 14 must feel distinct.
+- DO NOT repeat the same word, sentence pattern, or answer wording twice. Each of the 18 must feel distinct.
 - Vary the position of the correct option (do not always put it first).
 Each item is an object:
   "t": one of "選擇題","填空題","是非題","改錯題","重組題","語意題","情境題","翻譯題","閱讀題"
@@ -529,7 +529,7 @@ Each item is an object:
   "opts": array of options. 是非題 must be exactly ["正確 True","錯誤 False"]; others 3-4 options.
   "a": 0-based index of the correct option
   "ex": a short explanation in Traditional Chinese
-Return ONLY a JSON array of 14 objects, nothing else.`;
+Return ONLY a JSON array of 18 objects, nothing else.`;
   const model=getModel();
   const isOpenAI=!/^claude/i.test(model);   // claude* → Anthropic；其餘(gpt*/o*)→ OpenAI
   let res, data, text;
@@ -537,7 +537,7 @@ Return ONLY a JSON array of 14 objects, nothing else.`;
     res=await fetch("https://api.openai.com/v1/chat/completions",{
       method:"POST",
       headers:{"content-type":"application/json","Authorization":"Bearer "+key},
-      body:JSON.stringify({model, max_tokens:3800, temperature:1,
+      body:JSON.stringify({model, max_tokens:5000, temperature:1,
         messages:[{role:"system",content:sys},{role:"user",content:prompt}]})
     });
     if(!res.ok){ throw new Error("api "+res.status); }
@@ -547,7 +547,7 @@ Return ONLY a JSON array of 14 objects, nothing else.`;
     res=await fetch("https://api.anthropic.com/v1/messages",{
       method:"POST",
       headers:{"content-type":"application/json","x-api-key":key,"anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-access":"true"},
-      body:JSON.stringify({model, max_tokens:3800, temperature:1, system:sys, messages:[{role:"user",content:prompt}]})
+      body:JSON.stringify({model, max_tokens:5000, temperature:1, system:sys, messages:[{role:"user",content:prompt}]})
     });
     if(!res.ok){ throw new Error("api "+res.status); }
     data=await res.json();
@@ -569,7 +569,7 @@ function pickQuestions(bank){
   const r=bank.filter(q=>q.cat==="r"), g=bank.filter(q=>q.cat==="g"), v=bank.filter(q=>q.cat==="v");
   if(r.length||g.length||v.length){
     // 內建題庫：保證每關都考到閱讀(3)+文法(4)+單字(3)=10
-    chosen=[].concat(shuffle(r).slice(0,3), shuffle(g).slice(0,4), shuffle(v).slice(0,3));
+    chosen=[].concat(shuffle(r).slice(0,5), shuffle(g).slice(0,5), shuffle(v).slice(0,5));
     if(chosen.length<QUIZ_N){
       const rest=shuffle(bank.filter(q=>chosen.indexOf(q)<0));
       chosen=chosen.concat(rest.slice(0,QUIZ_N-chosen.length));
@@ -668,8 +668,8 @@ async function startQuiz(i){
   show("quizView");
 }
 
-/* ---------- 20 分鐘倒數計時，時間到沒做完就重來 ---------- */
-const QUIZ_SECONDS = 20*60;
+/* ---------- 15 分鐘倒數計時，時間到沒做完就重來 ---------- */
+const QUIZ_SECONDS = 15*60;
 let quizTimer=null, timeLeft=0;
 function fmt(s){ const m=Math.floor(s/60), ss=s%60; return (m<10?"0":"")+m+":"+(ss<10?"0":"")+ss; }
 function renderTimer(){
@@ -741,7 +741,7 @@ function finishQuiz(passed, timedOut){
     $("resRetry").textContent="重玩本關";$("resRetry").onclick=()=>startQuiz(session.level);
   }else if(timedOut){
     $("resTitle").textContent="⏰ 時間到！本關重來";
-    $("resMsg").textContent="20 分鐘內未完成，本關需從頭重來。題目會重新隨機抽取，加油！";
+    $("resMsg").textContent="15 分鐘內未完成，本關需從頭重來。題目會重新隨機抽取，加油！";
     $("resNext").classList.remove("hidden");
     $("resNext").textContent="🔄 重來本關";$("resNext").onclick=()=>startQuiz(session.level);
     $("resRetry").textContent="← 返回地圖";$("resRetry").onclick=renderMap;
