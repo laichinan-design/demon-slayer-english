@@ -275,7 +275,7 @@
 <div class="wrap">
   <header>
     <div class="logo">🗡️ 鬼滅之刃 英語修行<span class="en">DEMON SLAYER · ENGLISH QUEST</span></div>
-    <div class="tagline">跟著鬼殺隊討伐十二鬼月與鬼王無慘 ｜ 13 關 × 每關 2+ 文法主題（10 例句配圖＋10 單字＋閱讀短文）｜ 難度：國中二～三年級 ｜ 每關隨機 15 題（閱讀5＋文法5＋單字5）、限時 15 分鐘、全對才能通關</div>
+    <div class="tagline">跟著鬼殺隊討伐十二鬼月與鬼王無慘 ｜ 13 關 × 每關 2+ 文法主題（10 例句配圖＋20 單字＋閱讀短文）｜ 難度：國中二～三年級 ｜ 每關隨機 20 題（閱讀5＋文法5＋單字10）、限時 15 分鐘、全對才能通關</div>
   </header>
 
   <div class="topbar">
@@ -426,7 +426,7 @@
    ========================================================================= */
 
 const SAVE_KEY = "demonslayer_eng_v1";
-const QUIZ_N = 15, START_HEARTS = 3;
+const QUIZ_N = 20, START_HEARTS = 3;
 
 let state = load();
 function load(){
@@ -498,16 +498,16 @@ async function generateAIQuestions(lv){
   const scene=scenes[Math.floor(Math.random()*scenes.length)];
   const seed=Math.floor(Math.random()*1e9);
   const passage=lv.reading?lv.reading.en:"";
-  const prompt=`Create exactly 18 English questions for ONE level of a Demon Slayer (鬼滅之刃) learning game.
+  const prompt=`Create exactly 24 English questions for ONE level of a Demon Slayer (鬼滅之刃) learning game.
 Random seed: ${seed}. Use this seed so the set is DIFFERENT from any previous set — vary sentences, names, scenes and which options are correct.
 Suggested scene flavor for this batch: ${scene}（但可自由變化）.
 
 READING PASSAGE for this level (write the reading-comprehension questions based ONLY on this text):
 """${passage}"""
 
-COMPOSITION (exactly 18):
+COMPOSITION (exactly 24):
 - 6 GRAMMAR questions covering these grammar point(s) for this level: ${lv.focus} (${lv.rank}). The level may have TWO OR MORE grammar topics — cover all of them.
-- 6 VOCABULARY questions on these words (meaning, synonym/antonym, or correct usage): ${vocabList}.
+- 12 VOCABULARY questions on these words (meaning, synonym/antonym, or correct usage): ${vocabList}.
 - 6 READING-COMPREHENSION questions answerable ONLY from the passage above (use "t":"閱讀題"); ask about facts, reason, or main idea.
 
 USE A VARIETY OF QUESTION FORMATS (mix them, do not make them all the same):
@@ -521,7 +521,7 @@ USE A VARIETY OF QUESTION FORMATS (mix them, do not make them all the same):
 - "翻譯題" 選出中文句子對應的正確英文 (或英翻中)
 RULES:
 - Difficulty: Taiwan junior high grade 8-9; keep sentences short.
-- DO NOT repeat the same word, sentence pattern, or answer wording twice. Each of the 18 must feel distinct.
+- DO NOT repeat the same word, sentence pattern, or answer wording twice. Each of the 24 must feel distinct.
 - Vary the position of the correct option (do not always put it first).
 Each item is an object:
   "t": one of "選擇題","填空題","是非題","改錯題","重組題","語意題","情境題","翻譯題","閱讀題"
@@ -529,7 +529,7 @@ Each item is an object:
   "opts": array of options. 是非題 must be exactly ["正確 True","錯誤 False"]; others 3-4 options.
   "a": 0-based index of the correct option
   "ex": a short explanation in Traditional Chinese
-Return ONLY a JSON array of 18 objects, nothing else.`;
+Return ONLY a JSON array of 24 objects, nothing else.`;
   const model=getModel();
   const isOpenAI=!/^claude/i.test(model);   // claude* → Anthropic；其餘(gpt*/o*)→ OpenAI
   let res, data, text;
@@ -569,7 +569,7 @@ function pickQuestions(bank){
   const r=bank.filter(q=>q.cat==="r"), g=bank.filter(q=>q.cat==="g"), v=bank.filter(q=>q.cat==="v");
   if(r.length||g.length||v.length){
     // 內建題庫：保證每關都考到閱讀(3)+文法(4)+單字(3)=10
-    chosen=[].concat(shuffle(r).slice(0,5), shuffle(g).slice(0,5), shuffle(v).slice(0,5));
+    chosen=[].concat(shuffle(r).slice(0,5), shuffle(g).slice(0,5), shuffle(v).slice(0,10));
     if(chosen.length<QUIZ_N){
       const rest=shuffle(bank.filter(q=>chosen.indexOf(q)<0));
       chosen=chosen.concat(rest.slice(0,QUIZ_N-chosen.length));
