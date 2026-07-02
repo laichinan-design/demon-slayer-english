@@ -275,7 +275,7 @@
 <div class="wrap">
   <header>
     <div class="logo">🗡️ 鬼滅之刃 英語修行<span class="en">DEMON SLAYER · ENGLISH QUEST</span></div>
-    <div class="tagline">跟著鬼殺隊討伐十二鬼月與鬼王無慘 ｜ 13 關 × 每關 2+ 文法主題（10 例句配圖＋20 單字＋閱讀短文）｜ 難度：國中二～三年級 ｜ 每關隨機 20 題（閱讀5＋文法5＋單字10）、限時 15 分鐘、全對才能通關</div>
+    <div class="tagline">跟著鬼殺隊討伐十二鬼月與鬼王無慘 ｜ 13 關 × 每關 2+ 文法主題（10 例句配圖＋20 單字＋閱讀短文）｜ 難度：國中二～三年級 ｜ 每關隨機 20 題（閱讀5＋文法5＋單字10）、限時 20 分鐘、答對 18 題（含）以上即可通關</div>
   </header>
 
   <div class="topbar">
@@ -426,7 +426,7 @@
    ========================================================================= */
 
 const SAVE_KEY = "demonslayer_eng_v1";
-const QUIZ_N = 20, START_HEARTS = 3;
+const QUIZ_N = 20, PASS_NEEDED = 18, START_HEARTS = 3;
 
 let state = load();
 function load(){
@@ -668,8 +668,8 @@ async function startQuiz(i){
   show("quizView");
 }
 
-/* ---------- 15 分鐘倒數計時，時間到沒做完就重來 ---------- */
-const QUIZ_SECONDS = 15*60;
+/* ---------- 20 分鐘倒數計時，時間到沒做完就重來 ---------- */
+const QUIZ_SECONDS = 20*60;
 let quizTimer=null, timeLeft=0;
 function fmt(s){ const m=Math.floor(s/60), ss=s%60; return (m<10?"0":"")+m+":"+(ss<10?"0":"")+ss; }
 function renderTimer(){
@@ -714,7 +714,7 @@ function answer(k){
   if(session.hearts<=0){setTimeout(()=>finishQuiz(false),900);return;}
   const last=session.idx===session.qs.length-1;const nb=$("nextBtn");
   nb.classList.remove("hidden");nb.textContent=last?"看結果 →":"下一題 →";
-  nb.onclick=()=>{if(last){finishQuiz(session.correct===session.qs.length);}else{session.idx++;renderQuestion();}};
+  nb.onclick=()=>{if(last){finishQuiz(session.correct>=PASS_NEEDED);}else{session.idx++;renderQuestion();}};
 }
 function finishQuiz(passed, timedOut){
   stopTimer();
@@ -734,20 +734,20 @@ function finishQuiz(passed, timedOut){
   const isLast=session.level===LEVELS.length-1;
   if(passed){
     $("resTitle").textContent=isLast?"全 20 關通關！黎明降臨 🌅":"通關成功！Stage Clear!";
-    $("resMsg").textContent=isLast?"你陪炭治郎走完了全部修行，英文文法功力大成！可重玩任一關鞏固。":"全部答對，下一關已解鎖。乘勝追擊！";
+    $("resMsg").textContent=isLast?"你陪炭治郎走完了全部修行，英文文法功力大成！可重玩任一關鞏固。":"答對 18 題以上，下一關已解鎖。乘勝追擊！";
     $("resNext").classList.remove("hidden");
     $("resNext").textContent=isLast?"回到地圖 🗺️":"前往下一關 →";
     $("resNext").onclick=isLast?renderMap:()=>openLevel(session.level+1);
     $("resRetry").textContent="重玩本關";$("resRetry").onclick=()=>startQuiz(session.level);
   }else if(timedOut){
     $("resTitle").textContent="⏰ 時間到！本關重來";
-    $("resMsg").textContent="15 分鐘內未完成，本關需從頭重來。題目會重新隨機抽取，加油！";
+    $("resMsg").textContent="20 分鐘內未完成，本關需從頭重來。題目會重新隨機抽取，加油！";
     $("resNext").classList.remove("hidden");
     $("resNext").textContent="🔄 重來本關";$("resNext").onclick=()=>startQuiz(session.level);
     $("resRetry").textContent="← 返回地圖";$("resRetry").onclick=renderMap;
   }else{
     $("resTitle").textContent="闖關失敗… 再試一次！";
-    $("resMsg").textContent="必須「全部答對」才能通關（生命歸零也會失敗）。題目會重新隨機抽取，別氣餒！";
+    $("resMsg").textContent="需答對 18/20 題才能通關（最多錯 2 題；生命歸零也會失敗）。題目會重新隨機抽取，別氣餒！";
     $("resNext").classList.remove("hidden");
     $("resNext").textContent="🔄 再挑戰一次";$("resNext").onclick=()=>startQuiz(session.level);
     $("resRetry").textContent="← 返回地圖";$("resRetry").onclick=renderMap;
